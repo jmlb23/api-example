@@ -1,1 +1,2 @@
---@rules_dotnet//dotnet/settings:strict_deps=false
+startup --windows_enable_symlinks
+build --enable_runfiles

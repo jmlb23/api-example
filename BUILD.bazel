@@ -9,4 +9,7 @@ csharp_binary(
     deps = [
         "//Features:features"
     ],
+    data = [
+        "//Features:features"
+    ],
 )
