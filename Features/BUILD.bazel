@@ -1,4 +1,7 @@
-load("@rules_dotnet//dotnet/private/rules/csharp:library.bzl", "csharp_library")
+load(
+    "@rules_dotnet//dotnet:defs.bzl",
+    "csharp_library",
+)
 
 csharp_library(
     name = "features",

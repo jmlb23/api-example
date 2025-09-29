@@ -1,5 +1,8 @@
-load("@rules_dotnet//dotnet/private/rules/csharp:binary.bzl", "csharp_binary")
-
+load(
+    "@rules_dotnet//dotnet:defs.bzl",
+    "csharp_binary",
+    "publish_binary",
+)
 
 csharp_binary(
     name = "binary",
@@ -12,4 +15,11 @@ csharp_binary(
     data = [
         "//Features:features"
     ],
+)
+
+publish_binary(
+    name = "publish",
+    binary = ":binary",
+    self_contained = True,
+    target_framework = "net9.0",
 )
