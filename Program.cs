@@ -3,6 +3,9 @@ using api.Features.Users.Infra;
 using api.Features.Users.Handlers;
 
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore;
+using Microsoft.Extensions.DependencyInjection; 
+using Microsoft.AspNetCore.Http;
 using System;
 
 var builder = WebApplication.CreateBuilder(args);
