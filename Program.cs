@@ -9,8 +9,8 @@ var app = builder.Build();
 
 
 var todosApi = app.MapGroup("/users");
-todosApi.MapGet("/{id}", async (int id, IGetUserByIdQuery query) => {
-    var result = await ListUsers.Handle(new ListUsers.Request(new Guid()), query);
+todosApi.MapGet("/{id}", async (Guid id, IGetUserByIdQuery query) => {
+    var result = await ListUsers.Handle(new ListUsers.Request(id), query);
     return Results.Ok(result);
 });
 
