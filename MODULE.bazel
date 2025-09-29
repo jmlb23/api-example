@@ -1,0 +1,4 @@
+module(name = "api-example", version = "0.1")
+
+
+bazel_dep(name = "rules_dotnet", version = "0.19.2")

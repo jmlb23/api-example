@@ -1,9 +1,15 @@
 namespace api.Features.Users.Infra;
 
+using System.Threading.Tasks;
+using System.Threading;
+using System.Collections.Generic;
+using System.Linq;
+using System;
+
 using api.Features.Users.Domain.Query;
 using api.Features.Users.Domain;
 
-internal class GetUserByIdQuery : IGetUserByIdQuery 
+public class GetUserByIdQuery : IGetUserByIdQuery 
 {
     public Task<User> ExecuteAsync(Guid id, CancellationToken cancel)
     {

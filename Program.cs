@@ -2,6 +2,9 @@ using api.Features.Users.Domain.Query;
 using api.Features.Users.Infra;
 using api.Features.Users.Handlers;
 
+using Microsoft.AspNetCore.Builder;
+using System;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddScoped<IGetUserByIdQuery, GetUserByIdQuery>();

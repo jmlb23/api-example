@@ -1,0 +1,12 @@
+load("@rules_dotnet//dotnet/private/rules/csharp:binary.bzl", "csharp_binary")
+
+
+csharp_binary(
+    name = "binary",
+    srcs = ["Program.cs"],
+    target_frameworks = ["net9.0"],
+    project_sdk = "web",
+    deps = [
+        "//Features:features"
+    ],
+)

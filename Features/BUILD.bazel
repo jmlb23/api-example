@@ -1,0 +1,11 @@
+load("@rules_dotnet//dotnet/private/rules/csharp:library.bzl", "csharp_library")
+
+csharp_library(
+    name = "features",
+    srcs = glob(["**/*.cs"]),
+    target_frameworks = ["net9.0"],
+    visibility = ["//visibility:public"],
+    deps = [
+
+    ]
+)

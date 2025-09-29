@@ -2,6 +2,9 @@ namespace api.Features.Users.Handlers;
 
 using api.Features.Users.Domain.Query;
 
+using System.Threading.Tasks;
+using System;
+
 public static class ListUsers
 {
 
