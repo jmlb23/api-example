@@ -15,11 +15,5 @@ csharp_binary(
     data = [
         "//Features:features"
     ],
-)
-
-publish_binary(
-    name = "publish",
-    binary = ":binary",
-    self_contained = True,
-    target_framework = "net9.0",
+    run_analyzers = False
 )
