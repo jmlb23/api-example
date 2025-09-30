@@ -4,14 +4,9 @@ load(
 )
 
 csharp_library(
-    name = "features",
+    name = "users",
+    srcs = glob(["**/*.cs"]),
     target_frameworks = ["net9.0"],
     visibility = ["//visibility:public"],
-    deps = [
-        "//Features/Users:users"
-    ],
-    exports = [
-        "//Features/Users:users",
-    ],
     run_analyzers = False
 )
