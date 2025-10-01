@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.OpenApi;
-using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Hosting;
 using System;

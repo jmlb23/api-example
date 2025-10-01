@@ -10,10 +10,10 @@ csharp_binary(
     target_frameworks = ["net9.0"],
     project_sdk = "web",
     deps = [
-        "//src/Features:features"
-    ],
-    data = [
-        "//src/Features:features"
+        "//Features:features",
+        "@paket.main//swashbuckle.aspnetcore.swaggerui",
+        "@paket.main//microsoft.aspnetcore.openapi",
+        "@paket.main//microsoft.visualstudio.azure.containers.tools.targets",
     ],
     run_analyzers = False
 )

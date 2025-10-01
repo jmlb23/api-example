@@ -2,3 +2,6 @@ module(name = "api-example", version = "0.1")
 
 
 bazel_dep(name = "rules_dotnet", version = "0.19.2")
+
+main_extension = use_extension("//deps:paket.main_extension.bzl", "main_extension")
+use_repo(main_extension, "paket.main")
