@@ -6,5 +6,4 @@ NUGET
     Microsoft.OpenApi (2.3.2) - restriction: >= net9.0
       System.Text.Json (>= 8.0.5) - restriction: >= netstandard2.0
     Microsoft.VisualStudio.Azure.Containers.Tools.Targets (1.22.1)
-    Swashbuckle.AspNetCore.SwaggerUI (9.0.5)
     System.Text.Json (9.0.9) - restriction: >= net9.0

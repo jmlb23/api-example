@@ -11,7 +11,6 @@ csharp_binary(
     project_sdk = "web",
     deps = [
         "//Features:features",
-        "@paket.main//swashbuckle.aspnetcore.swaggerui",
         "@paket.main//microsoft.aspnetcore.openapi",
         "@paket.main//microsoft.visualstudio.azure.containers.tools.targets",
     ],
