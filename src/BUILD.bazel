@@ -10,10 +10,10 @@ csharp_binary(
     target_frameworks = ["net9.0"],
     project_sdk = "web",
     deps = [
-        "//Features:features"
+        "//api-example/src/Features:features"
     ],
     data = [
-        "//Features:features"
+        "//api-example/src/Features:features"
     ],
     run_analyzers = False
 )
