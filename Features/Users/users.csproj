@@ -1,13 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
-
-    <PropertyGroup>
-        <OutputType>Dll</OutputType>
-        <TargetFramework>net9.0</TargetFramework>
-        <Nullable>enable</Nullable>
-    </PropertyGroup>
-    <Target Name="SpicNSpan" AfterTargets="Clean">
-        <RemoveDir Directories="$(BaseOutputPath)" />
-        <RemoveDir Directories="$(BaseIntermediateOutputPath)" />
-    </Target>
-
+  <PropertyGroup>
+    <OutputType>Dll</OutputType>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <Target Name="SpicNSpan" AfterTargets="Clean">
+    <RemoveDir Directories="$(BaseOutputPath)" />
+    <RemoveDir Directories="$(BaseIntermediateOutputPath)" />
+  </Target>
+  <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>

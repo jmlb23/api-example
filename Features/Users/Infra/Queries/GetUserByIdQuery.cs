@@ -1,4 +1,4 @@
-namespace api.Features.Users.Infra;
+namespace api.Features.Users.Infra.Queries;
 
 using System.Threading.Tasks;
 using System.Threading;

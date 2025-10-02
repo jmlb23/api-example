@@ -1,6 +1,11 @@
 @api_HostAddress = http://localhost:5288
 
+### Get one user
+
 GET {{api_HostAddress}}/users/5dcc325c-f37e-4955-b37c-25434f037af0
 Accept: application/json
 
 ###
+
+GET {{api_HostAddress}}/users
+Accept: application/json
