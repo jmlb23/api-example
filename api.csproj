@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <Project Sdk="Microsoft.NET.Sdk.Web">
-  <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
-  </PropertyGroup>
-  <ItemGroup>
-    <Content Include="Features\features.csproj" />
-    <Content Include="Features\Users\users.csproj" />
-  </ItemGroup>
-  <Import Project=".paket\Paket.Restore.targets" />
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+        <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
+    </PropertyGroup>
+    <ItemGroup>
+        <Content Include="Features\features.csproj"/>
+        <Content Include="Features\Users\users.csproj"/>
+    </ItemGroup>
+    <Target Name="SpicNSpan" AfterTargets="Clean">
+        <RemoveDir Directories="$(BaseOutputPath)"/>
+        <RemoveDir Directories="$(BaseIntermediateOutputPath)"/>
+    </Target>
+    <Import Project=".paket\Paket.Restore.targets"/>
 </Project>
