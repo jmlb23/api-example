@@ -6,12 +6,13 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using System;
+using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<IGetUserByIdQuery, GetUserByIdQuery>();
 builder.Services.AddScoped<IGetUsersQuery, GetUsersQuery>();
-
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddOpenApiDocument();
     
@@ -20,8 +21,20 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseOpenApi();
-    app.UseReDoc(); 
+    app.UseSwaggerUi(); 
 }
+
+app.MapPost("/login", (Login login) => {
+    app.Logger.LogInformation($"form username={login.username} password={login.password}");
+    return Results.Accepted();
+});
+
+app.MapPost("/logout", ([FromHeader(Name = "Authorization")] String jwt) =>
+{
+    app.Logger.LogInformation($"form jwt={jwt}");
+    return Results.Accepted();
+});
+
 
 var usersApi = app.MapGroup("/users");
 
@@ -36,3 +49,5 @@ usersApi.MapGet("/", async (IGetUsersQuery query) => {
 });
 
 app.Run("http://localhost:5288");
+
+public record Login(String username, String password);
