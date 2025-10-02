@@ -11,8 +11,11 @@ csharp_binary(
     project_sdk = "web",
     deps = [
         "//Features:features",
-        "@paket.main//microsoft.aspnetcore.openapi",
-        "@paket.main//microsoft.visualstudio.azure.containers.tools.targets",
+        "@paket.main//nswag.aspnetcore",
+        "@paket.main//nswag.generation",
+        "@paket.main//nswag.core.yaml",
+        
+        "@paket.main//nswag.generation.aspnetcore"
     ],
     run_analyzers = False
 )
