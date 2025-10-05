@@ -1,1 +1,3 @@
-NSwag.AspNetCore
+Microsoft.AspNetCore.OpenApi
+Microsoft.OpenApi
+Swashbuckle.AspNetCore.ReDoc

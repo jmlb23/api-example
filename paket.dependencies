@@ -1,4 +1,6 @@
 source https://api.nuget.org/v3/index.json
 
 storage: none
-nuget NSwag.AspNetCore 14.6.1
+nuget Microsoft.AspNetCore.OpenApi 9.0.9
+nuget Microsoft.OpenApi 1.6.17
+nuget Swashbuckle.AspNetCore.ReDoc 9.0.6

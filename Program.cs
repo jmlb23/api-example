@@ -9,19 +9,24 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<IGetUserByIdQuery, GetUserByIdQuery>();
 builder.Services.AddScoped<IGetUsersQuery, GetUsersQuery>();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddOpenApiDocument();
+builder.Services.AddOpenApi();
+builder.Services.AddAuthentication().AddBearerToken();
     
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseOpenApi();
-    app.UseSwaggerUi(); 
+    app.MapOpenApi("/swagger/v1/swagger.json");
+    app.UseReDoc(c => {
+        c.DocumentTitle = "REDOC API Documentation";
+        c.SpecUrl = "/swagger/v1/swagger.json";
+    });
 }
 
 app.MapPost("/login", (Login login) => {
@@ -43,7 +48,7 @@ usersApi.MapGet("/{id}", async (Guid id, IGetUserByIdQuery query) => {
     return Results.Ok(result);
 });
 
-usersApi.MapGet("/", async (IGetUsersQuery query) => {
+usersApi.MapGet("/", [Authorize] async (IGetUsersQuery query) => {
     var results = await ListAllUsers.Handle(query, default);
     return Results.Ok(results);
 });
