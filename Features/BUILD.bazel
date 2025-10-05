@@ -8,7 +8,7 @@ csharp_library(
     target_frameworks = ["net9.0"],
     visibility = ["//visibility:public"],
     deps = [
-        "//Features/Users:users"
+        "//Features/Users:users",
     ],
     exports = [
         "//Features/Users:users",

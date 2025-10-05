@@ -11,11 +11,10 @@ csharp_binary(
     project_sdk = "web",
     deps = [
         "//Features:features",
-        "@paket.main//nswag.aspnetcore",
-        "@paket.main//nswag.generation",
-        "@paket.main//nswag.core.yaml",
-        
-        "@paket.main//nswag.generation.aspnetcore"
+        "@paket.main//microsoft.aspnetcore.openapi",
+        "@paket.main//microsoft.openapi",
+        "@paket.main//swashbuckle.aspnetcore.swaggerui",
+       
     ],
     run_analyzers = False
 )
