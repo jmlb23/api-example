@@ -23,9 +23,9 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi("/swagger/v1/swagger.json");
-    app.UseReDoc(c => {
+    app.UseSwaggerUI(c => {
         c.DocumentTitle = "REDOC API Documentation";
-        c.SpecUrl = "/swagger/v1/swagger.json";
+        c.SwaggerDocumentUrlsPath = "/swagger/v1/swagger.json";
     });
 }
 

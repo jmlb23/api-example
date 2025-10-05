@@ -4,4 +4,4 @@ NUGET
     Microsoft.AspNetCore.OpenApi (9.0.9)
       Microsoft.OpenApi (>= 1.6.17) - restriction: >= net9.0
     Microsoft.OpenApi (1.6.17)
-    Swashbuckle.AspNetCore.ReDoc (9.0.6)
+    Swashbuckle.AspNetCore.SwaggerUI (9.0.6)
