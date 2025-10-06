@@ -8,6 +8,7 @@
         <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
     </PropertyGroup>
     <ItemGroup>
+        <Content Include="Features\Auth\auth.csproj" />
         <Content Include="Features\features.csproj"/>
         <Content Include="Features\Users\users.csproj"/>
     </ItemGroup>
