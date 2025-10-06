@@ -55,11 +55,11 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-app.MapPost("/login", async (IAuthUserCommand command, Dictionary<string, string> login) =>
+app.MapPost("/login", async (IAuthUserCommand command, AuthHandler.Request login) =>
 {
     var auth = await AuthHandler.HandleAsync(
         command,
-        new AuthHandler.Request(login["username"], login["password"]),
+        login,
         CancellationToken.None
     );
     return TypedResults.Ok(auth);
