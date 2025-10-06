@@ -1,6 +1,8 @@
 source https://api.nuget.org/v3/index.json
 
 storage: none
+nuget Microsoft.AspNetCore.Authentication.JwtBearer 9.0.9
 nuget Microsoft.AspNetCore.OpenApi 9.0.9
 nuget Microsoft.OpenApi 1.6.17
 nuget Swashbuckle.AspNetCore.SwaggerUI 9.0.6
+nuget System.IdentityModel.Tokens.Jwt 8.14.0

@@ -1,3 +1,5 @@
 Microsoft.AspNetCore.OpenApi
 Microsoft.OpenApi
 Swashbuckle.AspNetCore.SwaggerUI
+System.IdentityModel.Tokens.Jwt
+Microsoft.AspNetCore.Authentication.JwtBearer
