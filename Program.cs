@@ -16,11 +16,15 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using api.Features.Publications.Domain.Commands;
+using api.Features.Publications.Infra.Commands;
+using api.Features.Publications.Handlers;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<IGetUserByIdQuery, GetUserByIdQuery>();
 builder.Services.AddScoped<IGetUsersQuery, GetUsersQuery>();
 builder.Services.AddScoped<IAuthUserCommand, AuthUserCommand>();
+builder.Services.AddScoped<IAddPublicationCommand, AddPublicationCommand>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddOpenApi();
 builder.Services.AddAuthentication().AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, jwtOptions =>
@@ -65,7 +69,7 @@ app.MapPost("/login", async (IAuthUserCommand command, AuthHandler.Request login
     return TypedResults.Ok(auth);
 });
 
-app.MapPost("/logout", ([FromHeader(Name = "Authorization")] String jwt) =>
+app.MapPost("/logout", ([FromHeader(Name = "Authorization")] string jwt) =>
 {
     app.Logger.LogInformation($"form jwt={jwt}");
     return TypedResults.Ok();
@@ -88,10 +92,30 @@ usersApi.MapGet("/", async (IGetUsersQuery query) =>
 
 var publicationsApi = app.MapGroup("/publications");
 
-publicationsApi.MapGet("/", () => { }).RequireAuthorization();
-publicationsApi.MapGet("/{id}", (Guid id) => { }).RequireAuthorization();
-publicationsApi.MapPost("/", (object payload) => { }).RequireAuthorization();
-publicationsApi.MapDelete("/{id}", (Guid id) => { }).RequireAuthorization();
-publicationsApi.MapPatch("/{id}", (Guid id, object payload) => { }).RequireAuthorization();
+publicationsApi.MapGet("/", () =>
+{
+
+}).RequireAuthorization();
+
+publicationsApi.MapGet("/{id}", (Guid id) =>
+{
+
+}).RequireAuthorization();
+
+publicationsApi.MapPost("/", async (AddPublicationHandler.Request payload, IAddPublicationCommand command, CancellationToken token) =>
+{
+    var result = await AddPublicationHandler.Handle(payload, command, token);
+    return TypedResults.Created($$"""{ "id": "{result}" }""");
+}).RequireAuthorization();
+
+publicationsApi.MapDelete("/{id}", (Guid id) =>
+{
+
+}).RequireAuthorization();
+
+publicationsApi.MapPatch("/{id}", (Guid id, object payload) =>
+{ 
+    
+}).RequireAuthorization();
 
 app.Run("https://localhost:5288");
