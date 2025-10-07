@@ -85,4 +85,13 @@ usersApi.MapGet("/", async (IGetUsersQuery query) =>
     return TypedResults.Ok(results);
 }).RequireAuthorization();
 
+
+var publicationsApi = app.MapGroup("/publications");
+
+publicationsApi.MapGet("/", () => { }).RequireAuthorization();
+publicationsApi.MapGet("/{id}", (Guid id) => { }).RequireAuthorization();
+publicationsApi.MapPost("/", (object payload) => { }).RequireAuthorization();
+publicationsApi.MapDelete("/{id}", (Guid id) => { }).RequireAuthorization();
+publicationsApi.MapPatch("/{id}", (Guid id, object payload) => { }).RequireAuthorization();
+
 app.Run("https://localhost:5288");
