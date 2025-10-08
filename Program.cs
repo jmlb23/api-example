@@ -19,8 +19,10 @@ using Microsoft.IdentityModel.Tokens;
 using api.Features.Publications.Domain.Commands;
 using api.Features.Publications.Infra.Commands;
 using api.Features.Publications.Handlers;
+using api.Features.Publications.Infra.Data;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<PublicationsContext>();
 builder.Services.AddScoped<IGetUserByIdQuery, GetUserByIdQuery>();
 builder.Services.AddScoped<IGetUsersQuery, GetUsersQuery>();
 builder.Services.AddScoped<IAuthUserCommand, AuthUserCommand>();
@@ -105,7 +107,7 @@ publicationsApi.MapGet("/{id}", (Guid id) =>
 publicationsApi.MapPost("/", async (AddPublicationHandler.Request payload, IAddPublicationCommand command, CancellationToken token) =>
 {
     var result = await AddPublicationHandler.Handle(payload, command, token);
-    return TypedResults.Created($$"""{ "id": "{result}" }""");
+    return TypedResults.Created($"{{\"id\":\"{result}\"}}");
 }).RequireAuthorization();
 
 publicationsApi.MapDelete("/{id}", (Guid id) =>
