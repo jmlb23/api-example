@@ -27,6 +27,7 @@ builder.Services.AddScoped<IGetUserByIdQuery, GetUserByIdQuery>();
 builder.Services.AddScoped<IGetUsersQuery, GetUsersQuery>();
 builder.Services.AddScoped<IAuthUserCommand, AuthUserCommand>();
 builder.Services.AddScoped<IAddPublicationCommand, AddPublicationCommand>();
+builder.Services.AddScoped<IRemovePublicationCommand, RemovePublicationCommand>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddOpenApi();
 builder.Services.AddAuthentication().AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, jwtOptions =>
@@ -110,8 +111,10 @@ publicationsApi.MapPost("/", async (AddPublicationHandler.Request payload, IAddP
     return TypedResults.Created($"{{\"id\":\"{result}\"}}");
 }).RequireAuthorization();
 
-publicationsApi.MapDelete("/{id}", (Guid id) =>
+publicationsApi.MapDelete("/{id}", async (Guid id, IRemovePublicationCommand command, CancellationToken token) =>
 {
+    await RemovePublicationHandler.Handle(id, command, token);
+    return TypedResults.Created($"{{\"id\":\"{id}\"}}");
 
 }).RequireAuthorization();
 
