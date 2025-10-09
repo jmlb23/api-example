@@ -6,7 +6,7 @@ using api.Features.Publications.Infra.Domain;
 using api.Features.Publications.UseCases;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace api.Features.Publications.Module;
+namespace api.Features.Publications;
 
 public static class PublicationsModule
 {

@@ -4,7 +4,6 @@ using System.Text;
 using System.Threading;
 using api.Features.Auth.Domain.Command;
 using api.Features.Auth.Infra;
-using api.Features.Users.UseCases;
 using api.Features.Auth.UseCases;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -16,15 +15,16 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using api.Features.Publications.UseCases;
 using api.Features.Users.Domain;
-using api.Features.Users.Infra.Domain;
-using api.Features.Publications.Module;
+using api.Features.Publications;
 using api.Features;
 using api.Features.Publications.Commands;
+using api.Features.Users;
+using api.Features.Users.Application.Queries;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddPublicationsModule();
-builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddUsersModule();
 builder.Services.AddScoped<IAuthUserCommand, AuthUserCommand>();
 
 
@@ -80,15 +80,15 @@ app.MapPost("/logout", ([FromHeader(Name = "Authorization")] string jwt) =>
 
 var usersApi = app.MapGroup("/users");
 
-usersApi.MapGet("/{id}", async (Guid id, IUserRepository repo) =>
+usersApi.MapGet("/{id}", async (Guid id, IHandler<GetUserByIdHandler.GetUsersByIdQuery, User?> handler) =>
 {
-    var result = await GetUserByIdHandler.Handle(new GetUserByIdHandler.GetUsersByIdQuery(id), repo);
+    var result = await handler.Handle(new GetUserByIdHandler.GetUsersByIdQuery(id));
     return TypedResults.Ok(result);
 }).RequireAuthorization();
 
-usersApi.MapGet("/", async (IUserRepository repository, CancellationToken token) =>
+usersApi.MapGet("/", async (IHandler<GetAllUsersHandler.None, IEnumerable<User>> handler) =>
 {
-    var results = await ListAllUsersHandler.Handle(new ListAllUsersHandler.GetAllUsersQuery(),repository, token);
+    var results = await handler.Handle(new GetAllUsersHandler.None());
     return TypedResults.Ok(results);
 }).RequireAuthorization();
 
