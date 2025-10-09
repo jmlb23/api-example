@@ -20,12 +20,18 @@ using api.Features.Users.Domain;
 using api.Features.Users.Infra.Domain;
 using api.Features.Publications.Domain;
 using api.Features.Publications.Infra.Domain;
+using api.Features;
+using api.Features.Publications.Commands;
 
 var builder = WebApplication.CreateBuilder(args);
+
 builder.Services.AddDbContext<PublicationsContext>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IAuthUserCommand, AuthUserCommand>();
 builder.Services.AddScoped<IPublicationRepository, PublicationRepository>();
+builder.Services.AddScoped<IHandler<AddPublicationHandler.AddPublicationCommand, AddPublicationHandler.Response>, AddPublicationHandler>();
+builder.Services.AddScoped<IHandler<RemovePublicationHandler.RemovePublicationCommand, Guid>, RemovePublicationHandler>();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddOpenApi();
 builder.Services.AddAuthentication().AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, jwtOptions =>
@@ -103,15 +109,15 @@ publicationsApi.MapGet("/{id}", (Guid id) =>
 
 }).RequireAuthorization();
 
-publicationsApi.MapPost("/", async (AddPublicationUseCase.AddPublicationCommand payload, IPublicationRepository repository, CancellationToken token) =>
+publicationsApi.MapPost("/", async (AddPublicationHandler.AddPublicationCommand payload, IHandler<AddPublicationHandler.AddPublicationCommand, AddPublicationHandler.Response> handler, CancellationToken token) =>
 {
-    var result = await AddPublicationUseCase.Handle(payload, repository);
+    var result = await handler.Handle(payload);
     return TypedResults.Created(new Uri($"/publications/{result.Id}"),result);
 }).RequireAuthorization();
 
-publicationsApi.MapDelete("/{id}", async (Guid id, IPublicationRepository repository) =>
+publicationsApi.MapDelete("/{id}", async (Guid id, IHandler<RemovePublicationHandler.RemovePublicationCommand, Guid> handler) =>
 {
-    await RemovePublicationUseCase.Handle(new RemovePublicationUseCase.RemovePublicationCommand(id), repository);
+    await handler.Handle(new RemovePublicationHandler.RemovePublicationCommand(id));
     return TypedResults.NoContent();
 
 }).RequireAuthorization();
