@@ -4,9 +4,7 @@ using System.Text;
 using System.Threading;
 using api.Features.Auth.Domain.Command;
 using api.Features.Auth.Infra;
-using api.Features.Users.Domain.Query;
 using api.Features.Users.UseCases;
-using api.Features.Users.Infra.Queries;
 using api.Features.Auth.UseCases;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -20,11 +18,12 @@ using api.Features.Publications.Domain.Commands;
 using api.Features.Publications.Infra.Commands;
 using api.Features.Publications.UseCases;
 using api.Features.Publications.Infra.Data;
+using api.Features.Users.Domain;
+using api.Features.Users.Infra.Domain;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<PublicationsContext>();
-builder.Services.AddScoped<IGetUserByIdQuery, GetUserByIdQuery>();
-builder.Services.AddScoped<IGetUsersQuery, GetUsersQuery>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IAuthUserCommand, AuthUserCommand>();
 builder.Services.AddScoped<IAddPublicationCommand, AddPublicationCommand>();
 builder.Services.AddScoped<IRemovePublicationCommand, RemovePublicationCommand>();
@@ -80,15 +79,15 @@ app.MapPost("/logout", ([FromHeader(Name = "Authorization")] string jwt) =>
 
 var usersApi = app.MapGroup("/users");
 
-usersApi.MapGet("/{id}", async (Guid id, IGetUserByIdQuery query) =>
+usersApi.MapGet("/{id}", async (Guid id, IUserRepository repo) =>
 {
-    var result = await ListUsersUseCase.Handle(new ListUsersUseCase.Request(id), query);
+    var result = await GetUserByIdHandler.Handle(new GetUserByIdHandler.GetUsersByIdQuery(id), repo);
     return TypedResults.Ok(result);
 }).RequireAuthorization();
 
-usersApi.MapGet("/", async (IGetUsersQuery query, CancellationToken token) =>
+usersApi.MapGet("/", async (IUserRepository repository, CancellationToken token) =>
 {
-    var results = await ListAllUsersUseCase.Handle(query, token);
+    var results = await ListAllUsersHandler.Handle(new ListAllUsersHandler.GetAllUsersQuery(),repository, token);
     return TypedResults.Ok(results);
 }).RequireAuthorization();
 

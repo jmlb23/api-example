@@ -1,4 +1,4 @@
-namespace api.Features.Application;
+namespace api.Features;
 
 public interface IOperation;
 
