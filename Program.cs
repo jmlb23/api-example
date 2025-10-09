@@ -62,12 +62,12 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-app.MapPost("/login", async (IAuthUserCommand command, AuthUseCase.Request login) =>
+app.MapPost("/login", async (IAuthUserCommand command, AuthUseCase.Request login, CancellationToken token) =>
 {
     var auth = await AuthUseCase.HandleAsync(
         command,
         login,
-        CancellationToken.None
+        token
     );
     return TypedResults.Ok(auth);
 });
@@ -86,9 +86,9 @@ usersApi.MapGet("/{id}", async (Guid id, IGetUserByIdQuery query) =>
     return TypedResults.Ok(result);
 }).RequireAuthorization();
 
-usersApi.MapGet("/", async (IGetUsersQuery query) =>
+usersApi.MapGet("/", async (IGetUsersQuery query, CancellationToken token) =>
 {
-    var results = await ListAllUsersUseCase.Handle(query, default);
+    var results = await ListAllUsersUseCase.Handle(query, token);
     return TypedResults.Ok(results);
 }).RequireAuthorization();
 
