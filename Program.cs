@@ -14,19 +14,18 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
-using api.Features.Publications.Domain.Commands;
-using api.Features.Publications.Infra.Commands;
 using api.Features.Publications.UseCases;
 using api.Features.Publications.Infra.Data;
 using api.Features.Users.Domain;
 using api.Features.Users.Infra.Domain;
+using api.Features.Publications.Domain;
+using api.Features.Publications.Infra.Domain;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<PublicationsContext>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IAuthUserCommand, AuthUserCommand>();
-builder.Services.AddScoped<IAddPublicationCommand, AddPublicationCommand>();
-builder.Services.AddScoped<IRemovePublicationCommand, RemovePublicationCommand>();
+builder.Services.AddScoped<IPublicationRepository, PublicationRepository>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddOpenApi();
 builder.Services.AddAuthentication().AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, jwtOptions =>
@@ -104,15 +103,15 @@ publicationsApi.MapGet("/{id}", (Guid id) =>
 
 }).RequireAuthorization();
 
-publicationsApi.MapPost("/", async (AddPublicationUseCase.Request payload, IAddPublicationCommand command, CancellationToken token) =>
+publicationsApi.MapPost("/", async (AddPublicationUseCase.AddPublicationCommand payload, IPublicationRepository repository, CancellationToken token) =>
 {
-    var result = await AddPublicationUseCase.Handle(payload, command, token);
+    var result = await AddPublicationUseCase.Handle(payload, repository);
     return TypedResults.Created(new Uri($"/publications/{result.Id}"),result);
 }).RequireAuthorization();
 
-publicationsApi.MapDelete("/{id}", async (Guid id, IRemovePublicationCommand command, CancellationToken token) =>
+publicationsApi.MapDelete("/{id}", async (Guid id, IPublicationRepository repository) =>
 {
-    await RemovePublicationUseCase.Handle(id, command, token);
+    await RemovePublicationUseCase.Handle(new RemovePublicationUseCase.RemovePublicationCommand(id), repository);
     return TypedResults.NoContent();
 
 }).RequireAuthorization();
