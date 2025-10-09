@@ -1,11 +1,12 @@
-namespace api.Features.Publications.Handlers;
 
 using System.Threading.Tasks;
 using System;
 using api.Features.Publications.Domain.Commands;
 using System.Threading;
 
-public static class AddPublicationHandler
+namespace api.Features.Publications.UseCases;
+
+public static class AddPublicationUseCase
 {
 
     public record Request(string Title, string Content);

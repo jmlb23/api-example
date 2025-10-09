@@ -5,9 +5,9 @@ using System.Threading;
 using api.Features.Auth.Domain.Command;
 using api.Features.Auth.Infra;
 using api.Features.Users.Domain.Query;
-using api.Features.Users.Handlers;
+using api.Features.Users.UseCases;
 using api.Features.Users.Infra.Queries;
-using api.Features.Auth.Handlers;
+using api.Features.Auth.UseCases;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -18,7 +18,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using api.Features.Publications.Domain.Commands;
 using api.Features.Publications.Infra.Commands;
-using api.Features.Publications.Handlers;
+using api.Features.Publications.UseCases;
 using api.Features.Publications.Infra.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -62,9 +62,9 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-app.MapPost("/login", async (IAuthUserCommand command, AuthHandler.Request login) =>
+app.MapPost("/login", async (IAuthUserCommand command, AuthUseCase.Request login) =>
 {
-    var auth = await AuthHandler.HandleAsync(
+    var auth = await AuthUseCase.HandleAsync(
         command,
         login,
         CancellationToken.None
@@ -82,13 +82,13 @@ var usersApi = app.MapGroup("/users");
 
 usersApi.MapGet("/{id}", async (Guid id, IGetUserByIdQuery query) =>
 {
-    var result = await ListUsers.Handle(new ListUsers.Request(id), query);
+    var result = await ListUsersUseCase.Handle(new ListUsersUseCase.Request(id), query);
     return TypedResults.Ok(result);
 }).RequireAuthorization();
 
 usersApi.MapGet("/", async (IGetUsersQuery query) =>
 {
-    var results = await ListAllUsers.Handle(query, default);
+    var results = await ListAllUsersUseCase.Handle(query, default);
     return TypedResults.Ok(results);
 }).RequireAuthorization();
 
@@ -105,15 +105,15 @@ publicationsApi.MapGet("/{id}", (Guid id) =>
 
 }).RequireAuthorization();
 
-publicationsApi.MapPost("/", async (AddPublicationHandler.Request payload, IAddPublicationCommand command, CancellationToken token) =>
+publicationsApi.MapPost("/", async (AddPublicationUseCase.Request payload, IAddPublicationCommand command, CancellationToken token) =>
 {
-    var result = await AddPublicationHandler.Handle(payload, command, token);
+    var result = await AddPublicationUseCase.Handle(payload, command, token);
     return TypedResults.Created($"{{\"id\":\"{result}\"}}");
 }).RequireAuthorization();
 
 publicationsApi.MapDelete("/{id}", async (Guid id, IRemovePublicationCommand command, CancellationToken token) =>
 {
-    await RemovePublicationHandler.Handle(id, command, token);
+    await RemovePublicationUseCase.Handle(id, command, token);
     return TypedResults.Created($"{{\"id\":\"{id}\"}}");
 
 }).RequireAuthorization();

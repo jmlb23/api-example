@@ -1,11 +1,13 @@
-namespace api.Features.Publications.Handlers;
 
 using System.Threading.Tasks;
 using System;
 using api.Features.Publications.Domain.Commands;
 using System.Threading;
 
-public static class RemovePublicationHandler
+namespace api.Features.Publications.UseCases;
+
+
+public static class RemovePublicationUseCase
 {
 
 

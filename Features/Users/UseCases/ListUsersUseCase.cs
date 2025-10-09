@@ -1,11 +1,12 @@
-namespace api.Features.Users.Handlers;
-
 using api.Features.Users.Domain.Query;
 
 using System.Threading.Tasks;
 using System;
 
-public static class ListUsers
+
+namespace api.Features.Users.UseCases;
+
+public static class ListUsersUseCase
 {
 
     public record Request(Guid Id);

@@ -3,9 +3,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using api.Features.Auth.Domain.Command;
 
-namespace api.Features.Auth.Handlers;
+namespace api.Features.Auth.UseCases;
 
-public static class AuthHandler
+public static class AuthUseCase
 {
     public record Request(string Username, string Password);
     public record Response(String Token, String RefreshToken);
