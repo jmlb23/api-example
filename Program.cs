@@ -15,22 +15,18 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using api.Features.Publications.UseCases;
-using api.Features.Publications.Infra.Data;
 using api.Features.Users.Domain;
 using api.Features.Users.Infra.Domain;
-using api.Features.Publications.Domain;
-using api.Features.Publications.Infra.Domain;
+using api.Features.Publications.Module;
 using api.Features;
 using api.Features.Publications.Commands;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<PublicationsContext>();
+builder.Services.AddPublicationsModule();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IAuthUserCommand, AuthUserCommand>();
-builder.Services.AddScoped<IPublicationRepository, PublicationRepository>();
-builder.Services.AddScoped<IHandler<AddPublicationHandler.AddPublicationCommand, AddPublicationHandler.Response>, AddPublicationHandler>();
-builder.Services.AddScoped<IHandler<RemovePublicationHandler.RemovePublicationCommand, Guid>, RemovePublicationHandler>();
+
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddOpenApi();
