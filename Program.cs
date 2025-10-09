@@ -108,13 +108,13 @@ publicationsApi.MapGet("/{id}", (Guid id) =>
 publicationsApi.MapPost("/", async (AddPublicationUseCase.Request payload, IAddPublicationCommand command, CancellationToken token) =>
 {
     var result = await AddPublicationUseCase.Handle(payload, command, token);
-    return TypedResults.Created($"{{\"id\":\"{result}\"}}");
+    return TypedResults.Created(new Uri($"/publications/{result.Id}"),result);
 }).RequireAuthorization();
 
 publicationsApi.MapDelete("/{id}", async (Guid id, IRemovePublicationCommand command, CancellationToken token) =>
 {
     await RemovePublicationUseCase.Handle(id, command, token);
-    return TypedResults.Created($"{{\"id\":\"{id}\"}}");
+    return TypedResults.NoContent();
 
 }).RequireAuthorization();
 
