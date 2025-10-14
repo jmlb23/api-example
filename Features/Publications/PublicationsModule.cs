@@ -18,6 +18,7 @@ public static class PublicationsModule
         services.AddScoped<IPublicationRepository, PublicationRepository>();
         services.AddScoped<IHandler<AddPublicationHandler.AddPublicationCommand, AddPublicationHandler.Response>, AddPublicationHandler>();
         services.AddScoped<IHandler<RemovePublicationHandler.RemovePublicationCommand, Guid>, RemovePublicationHandler>();
+        services.AddScoped<IHandler<UpdatePublicationHandler.UpdatePublicationCommand, UpdatePublicationHandler.Response>, UpdatePublicationHandler>();
 
         return services;
     }

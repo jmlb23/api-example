@@ -15,7 +15,7 @@ public class PublicationRepository(PublicationsContext context) : IPublicationRe
 {
     public async Task<Guid> Add(PublicationDomain publication)
     {
-        var result  = await context.Publications.AddAsync(new Publication(publication.Id, publication.Title, publication.Content,
+        var result = await context.Publications.AddAsync(new Publication(publication.Id, publication.Title, publication.Content,
             publication.PublishDate));
         await context.SaveChangesAsync();
         return result.Entity.Id;
@@ -35,5 +35,20 @@ public class PublicationRepository(PublicationsContext context) : IPublicationRe
     {
         await context.Publications.Where(x => x.Id == id).ExecuteDeleteAsync();
         return id;
+    }
+
+    public async Task<Guid> Update(PublicationDomain publication)
+    {
+        var result = await context
+        .Publications
+        .Where(p => p.Id == publication.Id)
+        .ExecuteUpdateAsync(update =>
+            update
+            .SetProperty(p => p.Content, publication.Content)
+            .SetProperty(p => p.Title, publication.Title)
+            .SetProperty(p => p.PublishDate, publication.PublishDate)
+        );
+
+        return publication.Id;
     }
 }

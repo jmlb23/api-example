@@ -118,8 +118,11 @@ publicationsApi.MapDelete("/{id}", async (Guid id, IHandler<RemovePublicationHan
 
 }).RequireAuthorization();
 
-publicationsApi.MapPatch("/{id}", (Guid id, object payload) =>
-{ 
+publicationsApi.MapPut("/{id}", async (Guid id, UpdatePublicationHandler.UpdatePublicationDTO dto, IHandler<UpdatePublicationHandler.UpdatePublicationCommand, UpdatePublicationHandler.Response> handler) =>
+{
+    var result = await handler.Handle(new UpdatePublicationHandler.UpdatePublicationCommand(id, dto.Title, dto.Content, dto.PublishDate));
+
+    return TypedResults.Created($"/publications/{id}");
     
 }).RequireAuthorization();
 

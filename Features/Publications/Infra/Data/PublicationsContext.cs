@@ -13,4 +13,4 @@ public class PublicationsContext : DbContext
     }
 }
 
-public record Publication(Guid Id, string Title, string Slug, DateTime PublishDate);
+public record Publication(Guid Id, string Title, string Content, DateTime PublishDate);
