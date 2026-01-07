@@ -14,6 +14,7 @@ csharp_binary(
         "@paket.main//microsoft.aspnetcore.openapi",
         "@paket.main//microsoft.openapi",
         "@paket.main//swashbuckle.aspnetcore.swaggerui",
+        "@paket.main//microsoft.entityframeworkcore.inmemory",
        
     ],
     run_analyzers = False

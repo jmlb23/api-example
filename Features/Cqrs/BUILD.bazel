@@ -4,12 +4,9 @@ load(
 )
 
 csharp_library(
-    name = "users",
+    name = "cqrs",
     srcs = glob(["**/*.cs"]),
     target_frameworks = ["net9.0"],
     visibility = ["//visibility:public"],
-    deps = [
-        "//Features/Cqrs:cqrs",
-    ],
     run_analyzers = False
 )

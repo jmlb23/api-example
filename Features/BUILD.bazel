@@ -9,7 +9,9 @@ csharp_library(
     visibility = ["//visibility:public"],
     deps = [
         "//Features/Users:users",
+        "//Features/Publications:publications",
         "//Features/Auth:auth",
+        "//Features/Cqrs:cqrs",
     ],
     exports = [
         "//Features/Auth:auth",
