@@ -11,7 +11,7 @@ csharp_library(
         "//Features/Users:users",
         "//Features/Publications:publications",
         "//Features/Auth:auth",
-        "//Features/Cqrs:cqrs",
+        "//Features/Core:core",
     ],
     exports = [
         "//Features/Auth:auth",

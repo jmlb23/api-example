@@ -9,7 +9,7 @@ csharp_library(
     target_frameworks = ["net9.0"],
     visibility = ["//visibility:public"],
     deps = [
-        "//Features/Cqrs:cqrs",
+        "//Features/Core:core",
     ],
     run_analyzers = False
 )
