@@ -13,7 +13,7 @@ csharp_binary(
         "//Features:features",
         "@paket.main//microsoft.aspnetcore.openapi",
         "@paket.main//microsoft.openapi",
-        "@paket.main//swashbuckle.aspnetcore.swaggerui",
+        "@paket.main//scala.aspnetcore",
         "@paket.main//microsoft.entityframeworkcore.inmemory",
        
     ],
