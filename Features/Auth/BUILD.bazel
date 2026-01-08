@@ -6,6 +6,9 @@ load(
 csharp_library(
     name = "auth",
     srcs = glob(["**/*.cs"]),
+    deps = [
+        "@paket.main//microsoft.extensions.configuration",
+    ],
     target_frameworks = ["net9.0"],
     visibility = ["//visibility:public"],
     run_analyzers = False

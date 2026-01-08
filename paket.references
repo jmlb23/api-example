@@ -4,3 +4,4 @@ System.IdentityModel.Tokens.Jwt
 Microsoft.AspNetCore.Authentication.JwtBearer
 Microsoft.EntityFrameworkCore.InMemory
 Scalar.AspNetCore
+Microsoft.Extensions.Configuration
