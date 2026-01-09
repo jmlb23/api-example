@@ -4,13 +4,9 @@ load(
 )
 
 csharp_library(
-    name = "users",
+    name = "core",
     srcs = glob(["**/*.cs"]),
     target_frameworks = ["net9.0"],
     visibility = ["//visibility:public"],
-    deps = [
-        "@paket.main//microsoft.extensions.dependencyinjection.abstractions",
-        "//Features/Core:core",
-    ],
     run_analyzers = False
 )

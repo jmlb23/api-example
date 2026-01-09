@@ -3,7 +3,13 @@ source https://api.nuget.org/v3/index.json
 storage: none
 nuget Microsoft.AspNetCore.Authentication.JwtBearer 9.0.9
 nuget Microsoft.AspNetCore.OpenApi 9.0.9
+nuget Microsoft.EntityFrameworkCore 9.0.9
+nuget Microsoft.EntityFrameworkCore.Abstractions 9.0.9
 nuget Microsoft.EntityFrameworkCore.InMemory 9.0.9
+nuget Microsoft.Extensions.Configuration 9.0.9
+nuget Microsoft.Extensions.DependencyInjection 9.0.9
+nuget Microsoft.Extensions.DependencyInjection.Abstractions 9.0.9
+nuget Microsoft.IdentityModel.Tokens 8.14.0
 nuget Microsoft.OpenApi 1.6.17
 nuget Swashbuckle.AspNetCore.SwaggerUI 9.0.6
 nuget System.IdentityModel.Tokens.Jwt 8.14.0

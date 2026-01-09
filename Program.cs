@@ -2,9 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
-using api.Features.Auth.Domain.Command;
-using api.Features.Auth.Infra;
-using api.Features.Auth.UseCases;
+
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -13,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+
 using api.Features.Publications.UseCases;
 using api.Features.Users.Domain;
 using api.Features.Publications;
@@ -20,6 +19,9 @@ using api.Features;
 using api.Features.Publications.Commands;
 using api.Features.Users;
 using api.Features.Users.Application.Queries;
+using api.Features.Auth.Domain.Command;
+using api.Features.Auth.Infra;
+using api.Features.Auth.UseCases;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,6 +32,7 @@ builder.Services.AddScoped<IAuthUserCommand, AuthUserCommand>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddOpenApi();
+
 builder.Services.AddAuthentication().AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, jwtOptions =>
 {
     jwtOptions.TokenValidationParameters = new TokenValidationParameters
@@ -40,7 +43,7 @@ builder.Services.AddAuthentication().AddJwtBearer(JwtBearerDefaults.Authenticati
         ValidateIssuerSigningKey = true,
         ValidIssuer = builder.Configuration["jwt:issuer"] ?? throw new ArgumentException("Not found jwt:issuer"),
         ValidAudience = builder.Configuration["jwt:audience"] ?? throw new ArgumentException("Not found jwt:audience"),
-        IssuerSigningKey =  new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["jwt:key"] ?? throw new ArgumentException("Not found jwt:key")))
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["jwt:key"] ?? throw new ArgumentException("Not found jwt:key")))
     };
 });
 
@@ -52,6 +55,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 
+
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi("/swagger/v1/swagger.json");
@@ -61,6 +65,7 @@ if (app.Environment.IsDevelopment())
         c.SwaggerDocumentUrlsPath = "/swagger/v1/swagger.json";
     });
 }
+
 
 app.MapPost("/login", async (IAuthUserCommand command, AuthUseCase.Request login, CancellationToken token) =>
 {
@@ -108,7 +113,7 @@ publicationsApi.MapGet("/{id}", (Guid id) =>
 publicationsApi.MapPost("/", async (AddPublicationHandler.AddPublicationCommand payload, IHandler<AddPublicationHandler.AddPublicationCommand, AddPublicationHandler.Response> handler, CancellationToken token) =>
 {
     var result = await handler.Handle(payload);
-    return TypedResults.Created(new Uri($"/publications/{result.Id}"),result);
+    return TypedResults.Created(new Uri($"/publications/{result.Id}"), result);
 }).RequireAuthorization();
 
 publicationsApi.MapDelete("/{id}", async (Guid id, IHandler<RemovePublicationHandler.RemovePublicationCommand, Guid> handler) =>
@@ -123,7 +128,7 @@ publicationsApi.MapPut("/{id}", async (Guid id, UpdatePublicationHandler.UpdateP
     var result = await handler.Handle(new UpdatePublicationHandler.UpdatePublicationCommand(id, dto.Title, dto.Content, dto.PublishDate));
 
     return TypedResults.Created($"/publications/{id}");
-    
+
 }).RequireAuthorization();
 
 app.Run("https://localhost:5288");

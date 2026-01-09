@@ -1,6 +1,11 @@
-Microsoft.AspNetCore.OpenApi
-Microsoft.OpenApi
-Swashbuckle.AspNetCore.SwaggerUI
 System.IdentityModel.Tokens.Jwt
 Microsoft.AspNetCore.Authentication.JwtBearer
+Microsoft.Extensions.Configuration
+Microsoft.EntityFrameworkCore
+Microsoft.EntityFrameworkCore.Abstractions
+Microsoft.AspNetCore.OpenApi
+Swashbuckle.AspNetCore.SwaggerUI
 Microsoft.EntityFrameworkCore.InMemory
+Microsoft.Extensions.DependencyInjection
+Microsoft.Extensions.DependencyInjection.Abstractions
+Microsoft.IdentityModel.Tokens

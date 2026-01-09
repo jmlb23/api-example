@@ -9,10 +9,15 @@ csharp_library(
     visibility = ["//visibility:public"],
     deps = [
         "//Features/Users:users",
+        "//Features/Publications:publications",
         "//Features/Auth:auth",
+        "//Features/Core:core",
     ],
     exports = [
         "//Features/Auth:auth",
+        "//Features/Users:users",
+        "//Features/Publications:publications",
+        "//Features/Core:core",
     ],
     run_analyzers = False
 )

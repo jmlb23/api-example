@@ -4,12 +4,14 @@ load(
 )
 
 csharp_library(
-    name = "users",
+    name = "publications",
     srcs = glob(["**/*.cs"]),
     target_frameworks = ["net9.0"],
     visibility = ["//visibility:public"],
-    deps = [
+    deps = [ 
         "@paket.main//microsoft.extensions.dependencyinjection.abstractions",
+        "@paket.main//microsoft.entityframeworkcore",
+        "@paket.main//microsoft.entityframeworkcore.inmemory",
         "//Features/Core:core",
     ],
     run_analyzers = False
