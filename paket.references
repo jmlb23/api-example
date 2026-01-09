@@ -5,3 +5,4 @@ Microsoft.AspNetCore.Authentication.JwtBearer
 Microsoft.EntityFrameworkCore.InMemory
 Scalar.AspNetCore
 Microsoft.Extensions.Configuration
+Microsoft.Extensions.DependencyInjection.Abstractions
