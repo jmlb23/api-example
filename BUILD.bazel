@@ -14,6 +14,9 @@ csharp_binary(
         "@paket.main//microsoft.aspnetcore.openapi",
         "@paket.main//microsoft.openapi",
         "@paket.main//microsoft.entityframeworkcore.inmemory",
+        "@paket.main//microsoft.aspnetcore.authentication.jwtbearer",
+        "@paket.main//microsoft.identitymodel.tokens",
+        "@paket.main//swashbuckle.aspnetcore.swaggerui",
        
     ],
     run_analyzers = False

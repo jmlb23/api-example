@@ -15,6 +15,9 @@ csharp_library(
     ],
     exports = [
         "//Features/Auth:auth",
+        "//Features/Users:users",
+        "//Features/Publications:publications",
+        "//Features/Core:core",
     ],
     run_analyzers = False
 )
