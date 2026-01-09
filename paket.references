@@ -1,8 +1,1 @@
-Microsoft.AspNetCore.OpenApi
-Microsoft.OpenApi
-System.IdentityModel.Tokens.Jwt
-Microsoft.AspNetCore.Authentication.JwtBearer
-Microsoft.EntityFrameworkCore.InMemory
-Microsoft.Extensions.Configuration
-Microsoft.Extensions.DependencyInjection.Abstractions
-Swashbuckle.AspNetCore.SwaggerUI
+Microsoft.Extensions.Configuration.Binder
