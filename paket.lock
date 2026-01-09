@@ -34,7 +34,7 @@ NUGET
       Microsoft.Extensions.Configuration.Abstractions (>= 9.0.11) - restriction: || (>= net462) (>= netstandard2.0)
       Microsoft.Extensions.Primitives (>= 9.0.11) - restriction: || (>= net462) (>= netstandard2.0)
     Microsoft.Extensions.Configuration.Abstractions (10.0.1) - restriction: || (>= net462) (>= netstandard2.0)
-      Microsoft.Extensions.Primitives (>= 10.0.1)
+      Microsoft.Extensions.Primitives (>= 10.0.1) - restriction: || (>= net462) (>= netstandard2.0)
       System.ValueTuple (>= 4.6.1) - restriction: >= net462
     Microsoft.Extensions.DependencyInjection (9.0.9) - restriction: >= net8.0
       Microsoft.Extensions.DependencyInjection.Abstractions (>= 9.0.9) - restriction: || (>= net462) (>= netstandard2.0)
@@ -78,7 +78,7 @@ NUGET
       System.Text.Json (>= 8.0.5) - restriction: || (>= net462) (&& (< net6.0) (>= netstandard2.0))
     Microsoft.NETCore.Platforms (7.0.4) - restriction: && (< monoandroid) (>= netcoreapp2.0) (< netcoreapp2.1) (< netstandard2.1) (< xamarintvos) (< xamarinwatchos)
     Microsoft.OpenApi (1.6.17)
-    Scalar.AspNetCore (2.11.10)
+    Swashbuckle.AspNetCore.SwaggerUI (9.0.6)
     System.Buffers (4.6.1) - restriction: || (>= net462) (&& (< net6.0) (>= netcoreapp3.0) (< xamarinios) (< xamarinmac) (< xamarintvos) (< xamarinwatchos)) (&& (< net6.0) (>= netstandard2.0))
     System.Diagnostics.DiagnosticSource (9.0.9) - restriction: || (>= net462) (&& (< net6.0) (>= netstandard2.0)) (&& (>= net8.0) (< net9.0))
       System.Memory (>= 4.5.5) - restriction: || (>= net462) (&& (< net8.0) (>= netstandard2.0))

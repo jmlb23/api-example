@@ -12,8 +12,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 
-using Scalar.AspNetCore;
-
 using api.Features.Publications.UseCases;
 using api.Features.Users.Domain;
 using api.Features.Publications;
@@ -57,11 +55,17 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 
+
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi().AllowAnonymous();
-    app.MapScalarApiReference("/docs").AllowAnonymous();
+    app.MapOpenApi("/swagger/v1/swagger.json");
+    app.UseSwaggerUI(c =>
+    {
+        c.DocumentTitle = "OpenAPI Documentation";
+        c.SwaggerDocumentUrlsPath = "/swagger/v1/swagger.json";
+    });
 }
+
 
 app.MapPost("/login", async (IAuthUserCommand command, AuthUseCase.Request login, CancellationToken token) =>
 {
