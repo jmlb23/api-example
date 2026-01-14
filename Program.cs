@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
+using System.Linq;
+using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -11,6 +13,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.OpenApi.Models;
 
 using api.Features.Publications.UseCases;
 using api.Features.Users.Domain;
@@ -31,7 +35,43 @@ builder.Services.AddScoped<IAuthUserCommand, AuthUserCommand>();
 
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddOpenApi();
+builder.Services.AddOpenApi(options =>
+{
+    options.AddOperationTransformer((operation, context, cancellationToken) =>
+    {
+        var authMetadata = context.Description.ActionDescriptor.EndpointMetadata
+            .OfType<IAuthorizeData>();
+
+        if (authMetadata.Any())
+        {
+            operation.Security = [
+                new OpenApiSecurityRequirement {
+                    [new OpenApiSecurityScheme {
+                        Reference = new OpenApiReference { 
+                            Type = ReferenceType.SecurityScheme, 
+                            Id = "Bearer" 
+                        }
+                    }] = []
+                }
+            ];
+        }
+        return Task.CompletedTask;
+    });
+
+    options.AddDocumentTransformer((document, context, cancellationToken) =>
+    {
+        document.Components ??= new OpenApiComponents();
+        document.Components.SecuritySchemes.Add("Bearer", new OpenApiSecurityScheme
+        {
+            Type = SecuritySchemeType.Http,
+            Scheme = "bearer",
+            BearerFormat = "JWT",
+            Description = "Enter your JWT token"
+        });
+        return Task.CompletedTask;
+    });
+});
+
 
 builder.Services.AddAuthentication().AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, jwtOptions =>
 {
@@ -51,11 +91,6 @@ builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
-app.UseAuthentication();
-app.UseAuthorization();
-
-
-
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi("/swagger/v1/swagger.json");
@@ -65,6 +100,9 @@ if (app.Environment.IsDevelopment())
         c.SwaggerDocumentUrlsPath = "/swagger/v1/swagger.json";
     });
 }
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 
 app.MapPost("/login", async (IAuthUserCommand command, AuthUseCase.Request login, CancellationToken token) =>
@@ -81,7 +119,7 @@ app.MapPost("/logout", ([FromHeader(Name = "Authorization")] string jwt) =>
 {
     app.Logger.LogInformation($"form jwt={jwt}");
     return TypedResults.Ok();
-});
+}).RequireAuthorization();
 
 var usersApi = app.MapGroup("/users");
 
