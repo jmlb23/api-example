@@ -26,6 +26,7 @@ using api.Features.Users.Application.Queries;
 using api.Features.Auth.Domain.Command;
 using api.Features.Auth.Infra;
 using api.Features.Auth.UseCases;
+using api.Features.Comments.Commands;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -169,8 +170,10 @@ publicationsApi.MapPut("/{id}", async (Guid id, UpdatePublicationHandler.UpdateP
 
 }).RequireAuthorization();
 
-publicationsApi.MapPost("/{id}/comments", async (Guid id, dynamic dto) => {
-   return TypedResults.Created($"/publication/{id}/comments/{dto.id}");
+publicationsApi.MapPost("/{id}/comments", async (Guid id, dynamic dto,  IHandler<AddCommentHandler.AddCommentCommand, AddCommentHandler.Response> handler) =>
+{ 
+    var response = await handler.Handle(new AddCommentHandler.AddCommentCommand(id, dto.Content));
+    return TypedResults.Created($"/publication/{id}/comments/{response.Id}");
 }).RequireAuthorization();
 
 app.Run("https://localhost:5288");
