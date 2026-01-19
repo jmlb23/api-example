@@ -47,9 +47,9 @@ builder.Services.AddOpenApi(options =>
             operation.Security = [
                 new OpenApiSecurityRequirement {
                     [new OpenApiSecurityScheme {
-                        Reference = new OpenApiReference { 
-                            Type = ReferenceType.SecurityScheme, 
-                            Id = "Bearer" 
+                        Reference = new OpenApiReference {
+                            Type = ReferenceType.SecurityScheme,
+                            Id = "Bearer"
                         }
                     }] = []
                 }
@@ -167,6 +167,10 @@ publicationsApi.MapPut("/{id}", async (Guid id, UpdatePublicationHandler.UpdateP
 
     return TypedResults.Created($"/publications/{id}");
 
+}).RequireAuthorization();
+
+publicationsApi.MapPost("/{id}/comments", async (Guid id, dynamic dto) => {
+   return TypedResults.Created($"/publication/{id}/comments/{dto.id}");
 }).RequireAuthorization();
 
 app.Run("https://localhost:5288");

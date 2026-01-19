@@ -1,0 +1,12 @@
+load(
+    "@rules_dotnet//dotnet:defs.bzl",
+    "csharp_library",
+)
+
+csharp_library(
+    name = "core",
+    srcs = glob(["**/*.cs"]),
+    target_frameworks = ["net9.0"],
+    visibility = ["//visibility:public"],
+    run_analyzers = False
+)
