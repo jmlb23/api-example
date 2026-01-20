@@ -4,9 +4,13 @@ load(
 )
 
 csharp_library(
-    name = "core",
+    name = "comments",
     srcs = glob(["**/*.cs"]),
     target_frameworks = ["net9.0"],
     visibility = ["//visibility:public"],
+    deps = [
+        "//Features/Core:core",
+        "@paket.main//microsoft.extensions.dependencyinjection.abstractions",
+    ],
     run_analyzers = False
 )

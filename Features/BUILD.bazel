@@ -11,12 +11,14 @@ csharp_library(
         "//Features/Users:users",
         "//Features/Publications:publications",
         "//Features/Auth:auth",
+        "//Features/Comments:comments",
         "//Features/Core:core",
     ],
     exports = [
         "//Features/Auth:auth",
         "//Features/Users:users",
         "//Features/Publications:publications",
+        "//Features/Comments:comments",
         "//Features/Core:core",
     ],
     run_analyzers = False

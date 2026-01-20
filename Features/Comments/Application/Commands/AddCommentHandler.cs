@@ -7,6 +7,7 @@ namespace api.Features.Comments.Commands;
 
 public class AddCommentHandler(ICommentRepository repository) : IHandler<AddCommentHandler.AddCommentCommand, AddCommentHandler.Response>
 {
+    public record AddCommentRequest(String Content) : Command;
     public record AddCommentCommand(Guid PostId, string Content) : Command;
 
     public record Response(Guid Id);

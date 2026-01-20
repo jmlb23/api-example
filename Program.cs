@@ -26,12 +26,15 @@ using api.Features.Users.Application.Queries;
 using api.Features.Auth.Domain.Command;
 using api.Features.Auth.Infra;
 using api.Features.Auth.UseCases;
+
 using api.Features.Comments.Commands;
+using api.Features.Comments;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddPublicationsModule();
 builder.Services.AddUsersModule();
+builder.Services.AddCommentsModule();
 builder.Services.AddScoped<IAuthUserCommand, AuthUserCommand>();
 
 
@@ -170,7 +173,7 @@ publicationsApi.MapPut("/{id}", async (Guid id, UpdatePublicationHandler.UpdateP
 
 }).RequireAuthorization();
 
-publicationsApi.MapPost("/{id}/comments", async (Guid id, dynamic dto,  IHandler<AddCommentHandler.AddCommentCommand, AddCommentHandler.Response> handler) =>
+publicationsApi.MapPost("/{id}/comments", async (Guid id, AddCommentHandler.AddCommentRequest dto,  IHandler<AddCommentHandler.AddCommentCommand, AddCommentHandler.Response> handler) =>
 { 
     var response = await handler.Handle(new AddCommentHandler.AddCommentCommand(id, dto.Content));
     return TypedResults.Created($"/publication/{id}/comments/{response.Id}");
