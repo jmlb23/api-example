@@ -1,4 +1,7 @@
-using api.Features.Comments.Commands;
+using System.Collections.Generic;
+
+using api.Features.Comments.Application.Query;
+using api.Features.Comments.Application.Commands;
 using api.Features.Comments.Domain;
 using api.Features.Comments.Infra.Domain;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,6 +16,7 @@ public static class CommentsModule
         // Register your services, repositories, DbContext, etc.
         services.AddScoped<ICommentRepository, CommentRepository>();
         services.AddScoped<IHandler<AddCommentHandler.AddCommentCommand, AddCommentHandler.Response>, AddCommentHandler>();
+        services.AddScoped<IHandler<GetAllCommentsHandler.None, IEnumerable<Comment>>, GetAllCommentsHandler>();
 
         return services;
     }

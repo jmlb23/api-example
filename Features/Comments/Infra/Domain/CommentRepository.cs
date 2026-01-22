@@ -7,9 +7,11 @@ namespace api.Features.Comments.Infra.Domain;
 
 class CommentRepository() : ICommentRepository
 {
-    public Task<IEnumerable<Comment>> GetAll()
+    private IList<Comment> _comments = new List<Comment>(); 
+
+    public async Task<IEnumerable<Comment>> GetAll()
     {
-        throw new NotImplementedException();
+        throw new NotImplementedException(( ">>>>>>>>" + _comments.Count));
     }
 
     public Task<Comment> GetById(Guid id)
@@ -17,9 +19,10 @@ class CommentRepository() : ICommentRepository
         throw new NotImplementedException();
     }
 
-    public Task<Guid> Add(Comment comment)
+    public async Task<Guid> Add(Comment comment)
     {
-        throw new NotImplementedException();
+        _comments.Add(comment);
+        return comment.Id;
     }
 
     public Task<Guid> Remove(Guid id)

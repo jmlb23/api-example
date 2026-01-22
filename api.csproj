@@ -5,6 +5,7 @@
         <TargetFramework>net9.0</TargetFramework>
         <Nullable>enable</Nullable>
         <UserSecretsId>95b37fa0-4fee-4683-9823-d701c10e5f14</UserSecretsId>
+        <RollForward>LatestMajor</RollForward>
     </PropertyGroup>
     <ItemGroup>
         <Content Include="Features\Auth\auth.csproj" />

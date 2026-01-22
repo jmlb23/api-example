@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using api.Features.Comments.Domain;
 using api.Features;
 
-namespace api.Features.Comments.Commands;
+namespace api.Features.Comments.Application.Commands;
 
 public class AddCommentHandler(ICommentRepository repository) : IHandler<AddCommentHandler.AddCommentCommand, AddCommentHandler.Response>
 {

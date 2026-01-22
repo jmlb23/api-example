@@ -26,9 +26,10 @@ using api.Features.Users.Application.Queries;
 using api.Features.Auth.Domain.Command;
 using api.Features.Auth.Infra;
 using api.Features.Auth.UseCases;
-
-using api.Features.Comments.Commands;
+using api.Features.Comments.Application.Commands;
+using api.Features.Comments.Application.Query;
 using api.Features.Comments;
+using api.Features.Comments.Domain;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -178,5 +179,12 @@ publicationsApi.MapPost("/{id}/comments", async (Guid id, AddCommentHandler.AddC
     var response = await handler.Handle(new AddCommentHandler.AddCommentCommand(id, dto.Content));
     return TypedResults.Created($"/publication/{id}/comments/{response.Id}");
 }).RequireAuthorization();
+
+publicationsApi.MapGet("/comments", async (IHandler<GetAllCommentsHandler.None, IEnumerable<Comment>> handler) =>
+{
+    var results = await handler.Handle(new GetAllCommentsHandler.None());
+    return TypedResults.Ok(results);
+}).RequireAuthorization();
+
 
 app.Run("https://localhost:5288");
