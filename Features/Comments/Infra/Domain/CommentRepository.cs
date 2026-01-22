@@ -7,11 +7,11 @@ namespace api.Features.Comments.Infra.Domain;
 
 class CommentRepository() : ICommentRepository
 {
-    private IList<Comment> _comments = new List<Comment>(); 
+    private static IList<Comment> _comments = new List<Comment>(); 
 
     public async Task<IEnumerable<Comment>> GetAll()
     {
-        throw new NotImplementedException(( ">>>>>>>>" + _comments.Count));
+        return _comments;
     }
 
     public Task<Comment> GetById(Guid id)
