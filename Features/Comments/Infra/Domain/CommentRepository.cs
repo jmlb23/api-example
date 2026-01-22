@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using api.Features.Comments.Domain;
 
@@ -14,9 +15,9 @@ class CommentRepository() : ICommentRepository
         return _comments;
     }
 
-    public Task<Comment> GetById(Guid id)
+    public async Task<Comment> GetById(Guid id)
     {
-        throw new NotImplementedException();
+        return _comments.First(x => x.Id == id);
     }
 
     public async Task<Guid> Add(Comment comment)

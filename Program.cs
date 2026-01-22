@@ -177,14 +177,20 @@ publicationsApi.MapPut("/{id}", async (Guid id, UpdatePublicationHandler.UpdateP
 publicationsApi.MapPost("/{id}/comments", async (Guid id, AddCommentHandler.AddCommentRequest dto,  IHandler<AddCommentHandler.AddCommentCommand, AddCommentHandler.Response> handler) =>
 { 
     var response = await handler.Handle(new AddCommentHandler.AddCommentCommand(id, dto.Content));
-    return TypedResults.Created($"/publication/{id}/comments/{response.Id}");
+    return TypedResults.Created($"/comments/{response.Id}");
 }).RequireAuthorization();
 
-publicationsApi.MapGet("/comments", async (IHandler<GetAllCommentsHandler.None, IEnumerable<Comment>> handler) =>
+var commentsApi = app.MapGroup("/comments");
+commentsApi.MapGet("/", async (IHandler<GetAllCommentsHandler.None, IEnumerable<Comment>> handler) =>
 {
     var results = await handler.Handle(new GetAllCommentsHandler.None());
     return TypedResults.Ok(results);
 }).RequireAuthorization();
 
+commentsApi.MapGet("/{id}", async (Guid id, IHandler<GetCommentByIdHandler.GetCommentByCommentIdQuery, Comment> handler) =>
+{
+    var results = await handler.Handle(new GetCommentByIdHandler.GetCommentByCommentIdQuery(id));
+    return TypedResults.Ok(results);
+}).RequireAuthorization();
 
 app.Run("https://localhost:5288");

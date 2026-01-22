@@ -16,6 +16,7 @@ public static class CommentsModule
         // Register your services, repositories, DbContext, etc.
         services.AddScoped<ICommentRepository, CommentRepository>();
         services.AddScoped<IHandler<AddCommentHandler.AddCommentCommand, AddCommentHandler.Response>, AddCommentHandler>();
+        services.AddScoped<IHandler<GetCommentByIdHandler.GetCommentByCommentIdQuery, Comment>, GetCommentByIdHandler>();
         services.AddScoped<IHandler<GetAllCommentsHandler.None, IEnumerable<Comment>>, GetAllCommentsHandler>();
 
         return services;
