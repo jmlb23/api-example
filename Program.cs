@@ -26,11 +26,16 @@ using api.Features.Users.Application.Queries;
 using api.Features.Auth.Domain.Command;
 using api.Features.Auth.Infra;
 using api.Features.Auth.UseCases;
+using api.Features.Comments.Application.Commands;
+using api.Features.Comments.Application.Query;
+using api.Features.Comments;
+using api.Features.Comments.Domain;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddPublicationsModule();
 builder.Services.AddUsersModule();
+builder.Services.AddCommentsModule();
 builder.Services.AddScoped<IAuthUserCommand, AuthUserCommand>();
 
 
@@ -47,9 +52,9 @@ builder.Services.AddOpenApi(options =>
             operation.Security = [
                 new OpenApiSecurityRequirement {
                     [new OpenApiSecurityScheme {
-                        Reference = new OpenApiReference { 
-                            Type = ReferenceType.SecurityScheme, 
-                            Id = "Bearer" 
+                        Reference = new OpenApiReference {
+                            Type = ReferenceType.SecurityScheme,
+                            Id = "Bearer"
                         }
                     }] = []
                 }
@@ -167,6 +172,31 @@ publicationsApi.MapPut("/{id}", async (Guid id, UpdatePublicationHandler.UpdateP
 
     return TypedResults.Created($"/publications/{id}");
 
+}).RequireAuthorization();
+
+publicationsApi.MapPost("/{id}/comments", async (Guid id, AddCommentHandler.AddCommentRequest dto,  IHandler<AddCommentHandler.AddCommentCommand, AddCommentHandler.Response> handler) =>
+{ 
+    var response = await handler.Handle(new AddCommentHandler.AddCommentCommand(id, dto.Content));
+    return TypedResults.Created($"/comments/{response.Id}");
+}).RequireAuthorization();
+
+publicationsApi.MapGet("/{id}/comments", async (Guid id, IHandler<GetCommentsByPostIdHandler.GetCommentsByPostIdQuery, IEnumerable<Comment>> handler) =>
+{ 
+    var response = await handler.Handle(new GetCommentsByPostIdHandler.GetCommentsByPostIdQuery(id));
+    return TypedResults.Ok(response);
+}).RequireAuthorization();
+
+var commentsApi = app.MapGroup("/comments");
+commentsApi.MapGet("/", async (IHandler<GetAllCommentsHandler.None, IEnumerable<Comment>> handler) =>
+{
+    var results = await handler.Handle(new GetAllCommentsHandler.None());
+    return TypedResults.Ok(results);
+}).RequireAuthorization();
+
+commentsApi.MapGet("/{id}", async (Guid id, IHandler<GetCommentByIdHandler.GetCommentByCommentIdQuery, Comment> handler) =>
+{
+    var results = await handler.Handle(new GetCommentByIdHandler.GetCommentByCommentIdQuery(id));
+    return TypedResults.Ok(results);
 }).RequireAuthorization();
 
 app.Run("https://localhost:5288");
