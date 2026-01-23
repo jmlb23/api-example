@@ -180,6 +180,12 @@ publicationsApi.MapPost("/{id}/comments", async (Guid id, AddCommentHandler.AddC
     return TypedResults.Created($"/comments/{response.Id}");
 }).RequireAuthorization();
 
+publicationsApi.MapGet("/{id}/comments", async (Guid id, IHandler<GetCommentsByPostIdHandler.GetCommentsByPostIdQuery, IEnumerable<Comment>> handler) =>
+{ 
+    var response = await handler.Handle(new GetCommentsByPostIdHandler.GetCommentsByPostIdQuery(id));
+    return TypedResults.Ok(response);
+}).RequireAuthorization();
+
 var commentsApi = app.MapGroup("/comments");
 commentsApi.MapGet("/", async (IHandler<GetAllCommentsHandler.None, IEnumerable<Comment>> handler) =>
 {

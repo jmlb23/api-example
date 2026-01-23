@@ -18,6 +18,7 @@ public static class CommentsModule
         services.AddScoped<IHandler<AddCommentHandler.AddCommentCommand, AddCommentHandler.Response>, AddCommentHandler>();
         services.AddScoped<IHandler<GetCommentByIdHandler.GetCommentByCommentIdQuery, Comment>, GetCommentByIdHandler>();
         services.AddScoped<IHandler<GetAllCommentsHandler.None, IEnumerable<Comment>>, GetAllCommentsHandler>();
+        services.AddScoped<IHandler<GetCommentsByPostIdHandler.GetCommentsByPostIdQuery, IEnumerable<Comment>>, GetCommentsByPostIdHandler>();
 
         return services;
     }

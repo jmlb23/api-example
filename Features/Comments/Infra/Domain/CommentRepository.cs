@@ -36,4 +36,12 @@ class CommentRepository() : ICommentRepository
         throw new NotImplementedException();
     }
 
+    public async Task<IEnumerable<Comment>> Filter(Criteria criteria)
+    {
+        return criteria switch
+        {
+            PostIdCriteria p => _comments.Where(c => c.PostId == p.PostId),
+            _ => _comments,
+        };
+    }
 }
