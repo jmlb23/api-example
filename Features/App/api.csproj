@@ -6,15 +6,18 @@
         <Nullable>enable</Nullable>
         <UserSecretsId>95b37fa0-4fee-4683-9823-d701c10e5f14</UserSecretsId>
         <RollForward>LatestMajor</RollForward>
+        <OutputType>Exe</OutputType>
     </PropertyGroup>
     <ItemGroup>
-        <Content Include="Features\Auth\auth.csproj" />
-        <Content Include="Features\features.csproj"/>
-        <Content Include="Features\Users\users.csproj"/>
+        <ProjectReference Include="..\Auth\auth.csproj" />
+        <ProjectReference Include="..\Comments\comments.csproj"/>
+        <ProjectReference Include="..\Core\core.csproj"/>
+        <ProjectReference Include="..\Publications\publications.csproj"/>
+        <ProjectReference Include="..\Users\users.csproj"/>
     </ItemGroup>
     <Target Name="SpicNSpan" AfterTargets="Clean">
         <RemoveDir Directories="$(BaseOutputPath)"/>
         <RemoveDir Directories="$(BaseIntermediateOutputPath)"/>
     </Target>
-    <Import Project=".paket\Paket.Restore.targets"/>
+    <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>

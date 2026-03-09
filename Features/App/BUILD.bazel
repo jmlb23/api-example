@@ -1,16 +1,19 @@
 load(
     "@rules_dotnet//dotnet:defs.bzl",
     "csharp_binary",
-    "publish_binary",
 )
 
 csharp_binary(
-    name = "binary",
+    name = "app",
     srcs = ["Program.cs"],
     target_frameworks = ["net9.0"],
     project_sdk = "web",
     deps = [
-        "//Features:features",
+        "//Features/Users:users",
+        "//Features/Publications:publications",
+        "//Features/Auth:auth",
+        "//Features/Comments:comments",
+        "//Features/Core:core",
         "@paket.main//microsoft.aspnetcore.openapi",
         "@paket.main//microsoft.openapi",
         "@paket.main//microsoft.entityframeworkcore.inmemory",
