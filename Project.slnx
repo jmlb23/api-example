@@ -1,0 +1,21 @@
+<Solution>
+  <Folder Name="/Features/" />
+  <Folder Name="/Features/App/">
+    <Project Path="Features/App/api.csproj" />
+  </Folder>
+  <Folder Name="/Features/Auth/">
+    <Project Path="Features/Auth/auth.csproj" />
+  </Folder>
+  <Folder Name="/Features/Comments/">
+    <Project Path="Features/Comments/comments.csproj" />
+  </Folder>
+  <Folder Name="/Features/Core/">
+    <Project Path="Features/Core/core.csproj" />
+  </Folder>
+  <Folder Name="/Features/Publications/">
+    <Project Path="Features/Publications/publications.csproj" />
+  </Folder>
+  <Folder Name="/Features/Users/">
+    <Project Path="Features/Users/users.csproj" />
+  </Folder>
+</Solution>
