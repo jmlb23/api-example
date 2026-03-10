@@ -21,9 +21,18 @@ public class PublicationRepository(PublicationsContext context) : IPublicationRe
         return result.Entity.Id;
     }
 
-    public Task<IEnumerable<PublicationDomain>> GetAll()
+    public async Task<IEnumerable<PublicationDomain>> GetAll()
     {
-        throw new NotImplementedException();
+        var result = context.Publications.AsEnumerable();
+        var mapped = result.Select(pub => 
+                new PublicationDomain(
+                    pub.Id, 
+                    pub.Title, 
+                    pub.Content, 
+                    pub.PublishDate
+                )
+        );
+        return mapped;
     }
 
     public Task<PublicationDomain> GetById(Guid id)

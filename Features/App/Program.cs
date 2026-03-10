@@ -23,6 +23,7 @@ using api.Features;
 using api.Features.Publications.Commands;
 using api.Features.Users;
 using api.Features.Users.Application.Queries;
+using api.Features.Publications.Application.Queries;
 using api.Features.Auth.Domain.Command;
 using api.Features.Auth.Infra;
 using api.Features.Auth.UseCases;
@@ -143,9 +144,10 @@ usersApi.MapGet("/", async (IHandler<GetAllUsersHandler.None, IEnumerable<User>>
 
 var publicationsApi = app.MapGroup("/publications");
 
-publicationsApi.MapGet("/", () =>
+publicationsApi.MapGet("/", async (IHandler<GetAllPublicationsHandler.None, GetAllPublicationsHandler.Response> handler) =>
 {
-
+    var result = await handler.Handle(new GetAllPublicationsHandler.None());
+    return TypedResults.Ok(result);
 }).RequireAuthorization();
 
 publicationsApi.MapGet("/{id}", (Guid id) =>

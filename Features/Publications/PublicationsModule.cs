@@ -1,5 +1,6 @@
 using System;
 using api.Features.Publications.Commands;
+using api.Features.Publications.Application.Queries;
 using api.Features.Publications.Domain;
 using api.Features.Publications.Infra.Data;
 using api.Features.Publications.Infra.Domain;
@@ -19,6 +20,7 @@ public static class PublicationsModule
         services.AddScoped<IHandler<AddPublicationHandler.AddPublicationCommand, AddPublicationHandler.Response>, AddPublicationHandler>();
         services.AddScoped<IHandler<RemovePublicationHandler.RemovePublicationCommand, Guid>, RemovePublicationHandler>();
         services.AddScoped<IHandler<UpdatePublicationHandler.UpdatePublicationCommand, UpdatePublicationHandler.Response>, UpdatePublicationHandler>();
+        services.AddScoped<IHandler<GetAllPublicationsHandler.None, GetAllPublicationsHandler.Response>, GetAllPublicationsHandler>();
 
         return services;
     }
