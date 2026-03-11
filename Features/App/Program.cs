@@ -150,9 +150,10 @@ publicationsApi.MapGet("/", async (IHandler<GetAllPublicationsHandler.None, GetA
     return TypedResults.Ok(result);
 }).RequireAuthorization();
 
-publicationsApi.MapGet("/{id}", (Guid id) =>
+publicationsApi.MapGet("/{id}", async (Guid id, IHandler<GetPublicationByIdQuery.Request, GetPublicationByIdQuery.Response> handler) =>
 {
-
+    var result = await handler.Handle(new GetPublicationByIdQuery.Request(id));
+    return TypedResults.Ok(result);
 }).RequireAuthorization();
 
 publicationsApi.MapPost("/", async (AddPublicationHandler.AddPublicationCommand payload, IHandler<AddPublicationHandler.AddPublicationCommand, AddPublicationHandler.Response> handler, CancellationToken token) =>

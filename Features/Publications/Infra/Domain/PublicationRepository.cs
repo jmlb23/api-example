@@ -35,9 +35,21 @@ public class PublicationRepository(PublicationsContext context) : IPublicationRe
         return mapped;
     }
 
-    public Task<PublicationDomain> GetById(Guid id)
+    public async Task<PublicationDomain?> GetById(Guid id)
     {
-        throw new NotImplementedException();
+        var result = await context
+            .Publications
+            .Select(pub => 
+                new PublicationDomain(
+                    pub.Id, 
+                    pub.Title, 
+                    pub.Content, 
+                    pub.PublishDate
+                )
+            )
+            .FirstOrDefaultAsync(x => x.Id == id);
+        
+        return result;
     }
 
     public async Task<Guid> Remove(Guid id)

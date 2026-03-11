@@ -8,7 +8,7 @@ namespace api.Features.Publications.Domain;
 public interface IPublicationRepository
 {
     Task<IEnumerable<Publication>> GetAll();
-    Task<Publication> GetById(Guid id);
+    Task<Publication?> GetById(Guid id);
     Task<Guid> Add(Publication publication);
     Task<Guid> Remove(Guid id);
     Task<Guid> Update(Publication publication);
