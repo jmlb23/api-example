@@ -8,6 +8,9 @@ csharp_binary(
     srcs = ["Program.cs"],
     target_frameworks = ["net9.0"],
     project_sdk = "web",
+    appsetting_files = [
+        "appsettings.json",
+    ] + glob(["appsettings.*.json"]),
     deps = [
         "//Features/Users:users",
         "//Features/Publications:publications",
