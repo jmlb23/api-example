@@ -125,6 +125,7 @@ app.MapPost("/logout", ([FromHeader(Name = "Authorization")] string jwt) =>
 {
     app.Logger.LogInformation($"form jwt={jwt}");
     return TypedResults.Ok();
+
 }).RequireAuthorization();
 
 var usersApi = app.MapGroup("/users");
@@ -133,12 +134,14 @@ usersApi.MapGet("/{id}", async (Guid id, IHandler<GetUserByIdHandler.GetUsersByI
 {
     var result = await handler.Handle(new GetUserByIdHandler.GetUsersByIdQuery(id));
     return TypedResults.Ok(result);
+
 }).RequireAuthorization();
 
 usersApi.MapGet("/", async (IHandler<GetAllUsersHandler.None, IEnumerable<User>> handler) =>
 {
     var results = await handler.Handle(new GetAllUsersHandler.None());
     return TypedResults.Ok(results);
+
 }).RequireAuthorization();
 
 
@@ -148,18 +151,21 @@ publicationsApi.MapGet("/", async (IHandler<GetAllPublicationsHandler.None, GetA
 {
     var result = await handler.Handle(new GetAllPublicationsHandler.None());
     return TypedResults.Ok(result);
+
 }).RequireAuthorization();
 
 publicationsApi.MapGet("/{id}", async (Guid id, IHandler<GetPublicationByIdQuery.Request, GetPublicationByIdQuery.Response> handler) =>
 {
     var result = await handler.Handle(new GetPublicationByIdQuery.Request(id));
     return TypedResults.Ok(result);
+
 }).RequireAuthorization();
 
 publicationsApi.MapPost("/", async (AddPublicationHandler.AddPublicationCommand payload, IHandler<AddPublicationHandler.AddPublicationCommand, AddPublicationHandler.Response> handler, CancellationToken token) =>
 {
     var result = await handler.Handle(payload);
     return TypedResults.Created(new Uri($"/publications/{result.Id}"), result);
+
 }).RequireAuthorization();
 
 publicationsApi.MapDelete("/{id}", async (Guid id, IHandler<RemovePublicationHandler.RemovePublicationCommand, Guid> handler) =>
@@ -172,7 +178,6 @@ publicationsApi.MapDelete("/{id}", async (Guid id, IHandler<RemovePublicationHan
 publicationsApi.MapPut("/{id}", async (Guid id, UpdatePublicationHandler.UpdatePublicationDTO dto, IHandler<UpdatePublicationHandler.UpdatePublicationCommand, UpdatePublicationHandler.Response> handler) =>
 {
     var result = await handler.Handle(new UpdatePublicationHandler.UpdatePublicationCommand(id, dto.Title, dto.Content, dto.PublishDate));
-
     return TypedResults.Created($"/publications/{id}");
 
 }).RequireAuthorization();
@@ -181,12 +186,14 @@ publicationsApi.MapPost("/{id}/comments", async (Guid id, AddCommentHandler.AddC
 { 
     var response = await handler.Handle(new AddCommentHandler.AddCommentCommand(id, dto.Content));
     return TypedResults.Created($"/comments/{response.Id}");
+
 }).RequireAuthorization();
 
 publicationsApi.MapGet("/{id}/comments", async (Guid id, IHandler<GetCommentsByPostIdHandler.GetCommentsByPostIdQuery, IEnumerable<Comment>> handler) =>
 { 
     var response = await handler.Handle(new GetCommentsByPostIdHandler.GetCommentsByPostIdQuery(id));
     return TypedResults.Ok(response);
+
 }).RequireAuthorization();
 
 var commentsApi = app.MapGroup("/comments");
@@ -194,12 +201,14 @@ commentsApi.MapGet("/", async (IHandler<GetAllCommentsHandler.None, IEnumerable<
 {
     var results = await handler.Handle(new GetAllCommentsHandler.None());
     return TypedResults.Ok(results);
+
 }).RequireAuthorization();
 
 commentsApi.MapGet("/{id}", async (Guid id, IHandler<GetCommentByIdHandler.GetCommentByCommentIdQuery, Comment> handler) =>
 {
     var results = await handler.Handle(new GetCommentByIdHandler.GetCommentByCommentIdQuery(id));
     return TypedResults.Ok(results);
+
 }).RequireAuthorization();
 
 app.Run("https://localhost:5288");
