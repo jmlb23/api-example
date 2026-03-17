@@ -25,5 +25,8 @@ csharp_binary(
         "@paket.main//swashbuckle.aspnetcore.swaggerui",
        
     ],
+    envs = {
+        "DOTNET_ENVIRONMENT": "Development"
+    },
     run_analyzers = False
 )

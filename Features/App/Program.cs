@@ -79,10 +79,6 @@ builder.Services.AddOpenApi(options =>
 });
 
 
-builder.Configuration.GetChildren().ToList().ForEach(x => 
-        Console.WriteLine(x.Key)
-);
-
 builder.Services.AddAuthentication().AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, jwtOptions =>
 {
     jwtOptions.TokenValidationParameters = new TokenValidationParameters
