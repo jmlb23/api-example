@@ -24,9 +24,8 @@ using api.Features.Publications.Commands;
 using api.Features.Users;
 using api.Features.Users.Application.Queries;
 using api.Features.Publications.Application.Queries;
-using api.Features.Auth.Domain.Command;
-using api.Features.Auth.Infra;
-using api.Features.Auth.UseCases;
+using api.Features.Auth;
+using api.Features.Auth.Applicaiton.Command;
 using api.Features.Comments.Application.Commands;
 using api.Features.Comments.Application.Query;
 using api.Features.Comments;
@@ -37,8 +36,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddPublicationsModule();
 builder.Services.AddUsersModule();
 builder.Services.AddCommentsModule();
-builder.Services.AddScoped<IAuthUserCommand, AuthUserCommand>();
-
+builder.Services.AddAuthModule();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddOpenApi(options =>
@@ -111,12 +109,10 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 
-app.MapPost("/login", async (IAuthUserCommand command, AuthUseCase.Request login, CancellationToken token) =>
+app.MapPost("/login", async (IHandler<AuthUserHandler.Request, AuthUserHandler.Response> handler, AuthUserHandler.Request login) =>
 {
-    var auth = await AuthUseCase.HandleAsync(
-        command,
-        login,
-        token
+    var auth = await handler.Handle(
+        login
     );
     return TypedResults.Ok(auth);
 });

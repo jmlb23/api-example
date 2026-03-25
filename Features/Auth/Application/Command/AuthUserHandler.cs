@@ -1,3 +1,5 @@
+namespace api.Features.Auth.Applicaiton.Command;
+
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -5,20 +7,21 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using api.Features.Auth.Domain;
-using api.Features.Auth.Domain.Command;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
-namespace api.Features.Auth.Infra;
+using api.Features;
 
-public class AuthUserCommand(IConfiguration configuration) : IAuthUserCommand
+public class AuthUserHandler(IConfiguration configuration) : IHandler<AuthUserHandler.Request, AuthUserHandler.Response>
 {
-    public async Task<AuthResult?> ExecuteAsync(Domain.Auth credentials, CancellationToken ct = default)
+    public record Request(string Username, string Password);
+    public record Response(String Token, String RefreshToken);
+
+    public async Task<Response> Handle(Request credentials)
     {
         var secHandler = new JwtSecurityTokenHandler();
         // simulate database Access
-        await Task.Delay(5000, ct);
+        await Task.Delay(5000, new CancellationToken());
         var token = secHandler.CreateToken(new SecurityTokenDescriptor()
         {
             Subject = new ClaimsIdentity([new Claim(ClaimTypes.Name, credentials.Username)]),
@@ -31,10 +34,10 @@ public class AuthUserCommand(IConfiguration configuration) : IAuthUserCommand
                     SecurityAlgorithms.HmacSha256)
         });
         var serialisedToken = secHandler.WriteToken(token);
-        return serialisedToken switch
-        {
-            null => null,
-            _ => new AuthResult(serialisedToken, "")
-        };
+        return new Response(
+            serialisedToken ?? throw new SecurityTokenException("Could not be generated"),
+            ""
+        );
+
     }
 }
