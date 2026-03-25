@@ -7,10 +7,12 @@ csharp_library(
     name = "auth",
     srcs = glob(["**/*.cs"]),
     deps = [
+        "//Features/Core:core",
         "@paket.main//system.identitymodel.tokens.jwt",
         "@paket.main//microsoft.identitymodel.tokens",
         "@paket.main//microsoft.extensions.configuration",
         "@paket.main//microsoft.extensions.configuration.abstractions",
+        "@paket.main//microsoft.extensions.dependencyinjection.abstractions",
     ],
     target_frameworks = ["net9.0"],
     visibility = ["//visibility:public"],
