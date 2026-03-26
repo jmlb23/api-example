@@ -3,13 +3,13 @@ using System.Threading.Tasks;
 
 namespace api.Features;
 
-public interface IOperation;
+public sealed interface IOperation;
 
-public abstract record Command : IOperation;
+public interface Command : IOperation;
 
-public abstract record Query<T> : IOperation;
+public interface Query<T> : IOperation;
 
-public interface IHandler<in TCommand, TResult>
+public interface IHandler<in TCommand, TResult> where TCommand : IOperation
 {
     Task<TResult> Handle(TCommand command);
 }

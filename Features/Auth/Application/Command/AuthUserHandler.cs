@@ -14,7 +14,7 @@ using api.Features;
 
 public class AuthUserHandler(IConfiguration configuration) : IHandler<AuthUserHandler.Request, AuthUserHandler.Response>
 {
-    public record Request(string Username, string Password);
+    public record Request(string Username, string Password) : Command;
     public record Response(String Token, String RefreshToken);
 
     public async Task<Response> Handle(Request credentials)
