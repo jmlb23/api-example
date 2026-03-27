@@ -207,4 +207,4 @@ commentsApi.MapGet("/{id}", async (Guid id, IHandler<GetCommentByIdHandler.GetCo
 
 }).RequireAuthorization();
 
-app.Run("https://localhost:5288");
+app.Run();
