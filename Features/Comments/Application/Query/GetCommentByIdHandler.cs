@@ -15,5 +15,5 @@ public class GetCommentByIdHandler(ICommentRepository repository) :
     {
         return await repository.GetById(command.CommentId);
     }
-    
+
 }

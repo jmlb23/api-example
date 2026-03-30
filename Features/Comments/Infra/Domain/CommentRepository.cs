@@ -8,7 +8,7 @@ namespace api.Features.Comments.Infra.Domain;
 
 class CommentRepository() : ICommentRepository
 {
-    private static IList<Comment> _comments = new List<Comment>(); 
+    private static IList<Comment> _comments = new List<Comment>();
 
     public async Task<IEnumerable<Comment>> GetAll()
     {

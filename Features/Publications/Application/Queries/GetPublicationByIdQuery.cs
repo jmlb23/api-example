@@ -8,7 +8,7 @@ using api.Features;
 
 namespace api.Features.Publications.Application.Queries;
 
-public class GetPublicationByIdQuery(IPublicationRepository repository) : 
+public class GetPublicationByIdQuery(IPublicationRepository repository) :
     IHandler<GetPublicationByIdQuery.Request, GetPublicationByIdQuery.Response>
 {
     public record Request(Guid id) : Query<IEnumerable<Publication>>;
@@ -16,7 +16,7 @@ public class GetPublicationByIdQuery(IPublicationRepository repository) :
 
     public async Task<Response> Handle(Request param)
     {
-        var result = await repository.GetById(param.id); 
+        var result = await repository.GetById(param.id);
         return new Response(result);
     }
 }

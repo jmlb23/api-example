@@ -24,11 +24,11 @@ public class PublicationRepository(PublicationsContext context) : IPublicationRe
     public async Task<IEnumerable<PublicationDomain>> GetAll()
     {
         var result = context.Publications.AsEnumerable();
-        var mapped = result.Select(pub => 
+        var mapped = result.Select(pub =>
                 new PublicationDomain(
-                    pub.Id, 
-                    pub.Title, 
-                    pub.Content, 
+                    pub.Id,
+                    pub.Title,
+                    pub.Content,
                     pub.PublishDate
                 )
         );
@@ -39,16 +39,16 @@ public class PublicationRepository(PublicationsContext context) : IPublicationRe
     {
         var result = await context
             .Publications
-            .Select(pub => 
+            .Select(pub =>
                 new PublicationDomain(
-                    pub.Id, 
-                    pub.Title, 
-                    pub.Content, 
+                    pub.Id,
+                    pub.Title,
+                    pub.Content,
                     pub.PublishDate
                 )
             )
             .FirstOrDefaultAsync(x => x.Id == id);
-        
+
         return result;
     }
 

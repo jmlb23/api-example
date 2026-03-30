@@ -7,10 +7,10 @@ using api.Features;
 
 namespace api.Features.Comments.Application.Query;
 
-public class GetAllCommentsHandler(ICommentRepository repository) : 
+public class GetAllCommentsHandler(ICommentRepository repository) :
     IHandler<GetAllCommentsHandler.None, IEnumerable<Comment>>
 {
-    public record None: Query<IEnumerable<Comment>>;
+    public record None : Query<IEnumerable<Comment>>;
 
     public async Task<IEnumerable<Comment>> Handle(None none)
     {

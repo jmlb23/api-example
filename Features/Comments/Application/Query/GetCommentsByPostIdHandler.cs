@@ -15,5 +15,5 @@ public class GetCommentsByPostIdHandler(ICommentRepository repository) :
     {
         return await repository.Filter(new PostIdCriteria(command.PostId));
     }
-    
+
 }

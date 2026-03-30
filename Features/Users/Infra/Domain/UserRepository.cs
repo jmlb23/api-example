@@ -11,12 +11,12 @@ public class UserRepository : IUserRepository
     public async Task<User?> GetUserByIdAsync(Guid id)
     {
         return await Task.FromResult(
-               new List<User>(){ new User(Guid.Parse("5dcc325c-f37e-4955-b37c-25434f037af0"),"pepe","pepe23","pepe@gmail.com") }
+               new List<User>() { new User(Guid.Parse("5dcc325c-f37e-4955-b37c-25434f037af0"), "pepe", "pepe23", "pepe@gmail.com") }
                .AsEnumerable()
                .First(user => user.Id == id)
-               ); 
+               );
     }
-        
+
 
     public Task<IEnumerable<User>> GetUsersAsync()
     {
@@ -27,5 +27,5 @@ public class UserRepository : IUserRepository
                 }.AsEnumerable()
         );
     }
-    
+
 }
