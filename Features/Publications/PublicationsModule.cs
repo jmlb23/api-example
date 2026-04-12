@@ -6,6 +6,9 @@ using api.Features.Publications.Infra.Data;
 using api.Features.Publications.Infra.Domain;
 using api.Features.Publications.UseCases;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
 
 namespace api.Features.Publications;
 
@@ -13,7 +16,18 @@ public static class PublicationsModule
 {
     public static IServiceCollection AddPublicationsModule(this IServiceCollection services)
     {
-        services.AddDbContext<PublicationsContext>();
+        services.AddDbContext<PublicationsContext>((serviceProvider, options) =>
+        {
+            var env = serviceProvider.GetRequiredService<IWebHostEnvironment>();
+            switch (env?.IsProduction())
+            {
+                case true:
+                    break;
+                default:
+                    options.UseInMemoryDatabase("MyDatabase");
+                    break;
+            }
+        });
 
         // Register your services, repositories, DbContext, etc.
         services.AddScoped<IPublicationRepository, PublicationRepository>();
