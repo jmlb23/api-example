@@ -108,23 +108,22 @@ if (app.Environment.IsDevelopment())
 app.UseAuthentication();
 app.UseAuthorization();
 
-
 app.MapPost("/login", async (IHandler<AuthUserHandler.Request, AuthUserHandler.Response> handler, AuthUserHandler.Request login) =>
 {
     var auth = await handler.Handle(
         login
     );
     return TypedResults.Ok(auth);
-});
+}).WithTags("Auth");
 
 app.MapPost("/logout", ([FromHeader(Name = "Authorization")] string jwt) =>
 {
     app.Logger.LogInformation($"form jwt={jwt}");
     return TypedResults.Ok();
 
-}).RequireAuthorization();
+}).WithTags("Auth").RequireAuthorization();
 
-var usersApi = app.MapGroup("/users");
+var usersApi = app.MapGroup("/users").WithTags("Users");
 
 usersApi.MapGet("/{id}", async (Guid id, IHandler<GetUserByIdHandler.GetUsersByIdQuery, User?> handler) =>
 {
@@ -141,7 +140,7 @@ usersApi.MapGet("/", async (IHandler<GetAllUsersHandler.None, IEnumerable<User>>
 }).RequireAuthorization();
 
 
-var publicationsApi = app.MapGroup("/publications");
+var publicationsApi = app.MapGroup("/publications").WithTags("Publications");
 
 publicationsApi.MapGet("/", async (IHandler<GetAllPublicationsHandler.None, GetAllPublicationsHandler.Response> handler) =>
 {
@@ -192,7 +191,7 @@ publicationsApi.MapGet("/{id}/comments", async (Guid id, IHandler<GetCommentsByP
 
 }).RequireAuthorization();
 
-var commentsApi = app.MapGroup("/comments");
+var commentsApi = app.MapGroup("/comments").WithTags("Comments");
 commentsApi.MapGet("/", async (IHandler<GetAllCommentsHandler.None, IEnumerable<Comment>> handler) =>
 {
     var results = await handler.Handle(new GetAllCommentsHandler.None());
