@@ -1,15 +1,16 @@
 STORAGE: NONE
 NUGET
   remote: https://api.nuget.org/v3/index.json
+    Microsoft.AspNetCore.App.Ref (9.0.9)
     Microsoft.AspNetCore.Authentication.JwtBearer (9.0.9)
       Microsoft.IdentityModel.Protocols.OpenIdConnect (>= 8.0.1) - restriction: >= net9.0
     Microsoft.AspNetCore.OpenApi (9.0.9)
       Microsoft.OpenApi (>= 1.6.17) - restriction: >= net9.0
-    Microsoft.Bcl.AsyncInterfaces (10.0.1) - restriction: || (>= net462) (&& (>= net6.0) (< net8.0)) (&& (< net6.0) (>= netstandard2.0)) (&& (>= netstandard2.0) (< netstandard2.1))
+    Microsoft.Bcl.AsyncInterfaces (10.0.14) - restriction: || (>= net462) (&& (>= net6.0) (< net8.0)) (&& (< net6.0) (>= netstandard2.0)) (&& (>= netstandard2.0) (< netstandard2.1))
       System.Threading.Tasks.Extensions (>= 4.6.3) - restriction: || (>= net462) (&& (>= netstandard2.0) (< netstandard2.1))
-    Microsoft.Bcl.TimeProvider (10.0.1) - restriction: || (>= net462) (&& (>= net6.0) (< net8.0)) (&& (< net6.0) (>= netstandard2.0))
-      Microsoft.Bcl.AsyncInterfaces (>= 10.0.1) - restriction: || (>= net462) (&& (< net8.0) (>= netstandard2.0))
-      System.ValueTuple (>= 4.6.1) - restriction: >= net462
+    Microsoft.Bcl.TimeProvider (10.0.14) - restriction: || (>= net462) (&& (>= net6.0) (< net8.0)) (&& (< net6.0) (>= netstandard2.0))
+      Microsoft.Bcl.AsyncInterfaces (>= 10.0.14) - restriction: || (>= net462) (&& (< net8.0) (>= netstandard2.0))
+      System.ValueTuple (>= 4.6.2) - restriction: >= net462
     Microsoft.CSharp (4.7) - restriction: && (< net462) (< net6.0) (>= netstandard2.0)
     Microsoft.EntityFrameworkCore (9.0.9)
       Microsoft.EntityFrameworkCore.Abstractions (>= 9.0.9) - restriction: >= net8.0
@@ -17,13 +18,13 @@ NUGET
       Microsoft.Extensions.Caching.Memory (>= 9.0.9) - restriction: >= net8.0
       Microsoft.Extensions.Logging (>= 9.0.9) - restriction: >= net8.0
     Microsoft.EntityFrameworkCore.Abstractions (9.0.9)
-    Microsoft.EntityFrameworkCore.Analyzers (10.0.1) - restriction: >= net8.0
+    Microsoft.EntityFrameworkCore.Analyzers (10.0.14) - restriction: >= net8.0
     Microsoft.EntityFrameworkCore.InMemory (9.0.9)
       Microsoft.EntityFrameworkCore (>= 9.0.9) - restriction: >= net8.0
       Microsoft.Extensions.Caching.Memory (>= 9.0.9) - restriction: >= net8.0
       Microsoft.Extensions.Logging (>= 9.0.9) - restriction: >= net8.0
-    Microsoft.Extensions.Caching.Abstractions (10.0.1) - restriction: >= net8.0
-      Microsoft.Extensions.Primitives (>= 10.0.1) - restriction: || (>= net462) (>= netstandard2.0)
+    Microsoft.Extensions.Caching.Abstractions (10.0.14) - restriction: >= net8.0
+      Microsoft.Extensions.Primitives (>= 10.0.14)
     Microsoft.Extensions.Caching.Memory (9.0.9) - restriction: >= net8.0
       Microsoft.Extensions.Caching.Abstractions (>= 9.0.9) - restriction: || (>= net462) (>= netstandard2.0)
       Microsoft.Extensions.DependencyInjection.Abstractions (>= 9.0.9) - restriction: || (>= net462) (>= netstandard2.0)
@@ -33,9 +34,9 @@ NUGET
     Microsoft.Extensions.Configuration (9.0.9)
       Microsoft.Extensions.Configuration.Abstractions (>= 9.0.9) - restriction: || (>= net462) (>= netstandard2.0)
       Microsoft.Extensions.Primitives (>= 9.0.9) - restriction: || (>= net462) (>= netstandard2.0)
-    Microsoft.Extensions.Configuration.Abstractions (10.0.1) - restriction: || (>= net462) (>= netstandard2.0)
-      Microsoft.Extensions.Primitives (>= 10.0.1) - restriction: || (>= net462) (>= netstandard2.0)
-      System.ValueTuple (>= 4.6.1) - restriction: >= net462
+    Microsoft.Extensions.Configuration.Abstractions (10.0.14) - restriction: || (>= net462) (>= netstandard2.0)
+      Microsoft.Extensions.Primitives (>= 10.0.14)
+      System.ValueTuple (>= 4.6.2) - restriction: >= net462
     Microsoft.Extensions.DependencyInjection (9.0.9)
       Microsoft.Bcl.AsyncInterfaces (>= 9.0.9) - restriction: || (>= net462) (&& (>= netstandard2.0) (< netstandard2.1))
       Microsoft.Extensions.DependencyInjection.Abstractions (>= 9.0.9) - restriction: || (>= net462) (>= netstandard2.0)
@@ -55,15 +56,15 @@ NUGET
     Microsoft.Extensions.Options (9.0.9) - restriction: >= net8.0
       Microsoft.Extensions.DependencyInjection.Abstractions (>= 9.0.9) - restriction: || (>= net462) (>= netstandard2.0)
       Microsoft.Extensions.Primitives (>= 9.0.9) - restriction: || (>= net462) (>= netstandard2.0)
-    Microsoft.Extensions.Primitives (10.0.1) - restriction: || (>= net462) (>= netstandard2.0)
+    Microsoft.Extensions.Primitives (10.0.14) - restriction: || (>= net462) (>= netstandard2.0)
       System.Memory (>= 4.6.3) - restriction: || (>= net462) (&& (< net8.0) (>= netstandard2.0))
       System.Runtime.CompilerServices.Unsafe (>= 6.1.2) - restriction: || (>= net462) (&& (< net8.0) (>= netstandard2.0))
-    Microsoft.IdentityModel.Abstractions (8.15) - restriction: || (>= net462) (>= netstandard2.0)
+    Microsoft.IdentityModel.Abstractions (8.23) - restriction: || (>= net462) (>= netstandard2.0)
     Microsoft.IdentityModel.JsonWebTokens (8.14) - restriction: || (>= net462) (>= netstandard2.0)
       Microsoft.Bcl.TimeProvider (>= 8.0.1) - restriction: || (>= net462) (&& (>= net6.0) (< net8.0)) (&& (< net6.0) (>= netstandard2.0))
       Microsoft.IdentityModel.Tokens (>= 8.14) - restriction: || (>= net462) (>= netstandard2.0)
-    Microsoft.IdentityModel.Logging (8.15) - restriction: || (>= net462) (>= netstandard2.0)
-      Microsoft.IdentityModel.Abstractions (>= 8.15) - restriction: || (>= net462) (>= netstandard2.0)
+    Microsoft.IdentityModel.Logging (8.23) - restriction: || (>= net462) (>= netstandard2.0)
+      Microsoft.IdentityModel.Abstractions (>= 8.23)
     Microsoft.IdentityModel.Protocols (8.14) - restriction: >= net9.0
       Microsoft.IdentityModel.Tokens (>= 8.14) - restriction: || (>= net462) (>= netstandard2.0)
     Microsoft.IdentityModel.Protocols.OpenIdConnect (8.14) - restriction: >= net9.0
@@ -84,15 +85,15 @@ NUGET
     Microsoft.OpenApi (1.6.17)
     Swashbuckle.AspNetCore.SwaggerUI (9.0.6)
     System.Buffers (4.6.1) - restriction: || (>= net462) (&& (< net6.0) (>= netstandard2.0)) (&& (< net8.0) (>= netstandard2.0))
-    System.Diagnostics.DiagnosticSource (10.0.1) - restriction: || (>= net462) (&& (< net6.0) (>= netstandard2.0)) (&& (>= net8.0) (< net9.0)) (&& (< net8.0) (>= netstandard2.0))
+    System.Diagnostics.DiagnosticSource (10.0.14) - restriction: || (>= net462) (&& (< net6.0) (>= netstandard2.0)) (&& (>= net8.0) (< net9.0)) (&& (< net8.0) (>= netstandard2.0))
       System.Memory (>= 4.6.3) - restriction: || (>= net462) (&& (< net8.0) (>= netstandard2.0))
       System.Runtime.CompilerServices.Unsafe (>= 6.1.2) - restriction: || (>= net462) (&& (< net8.0) (>= netstandard2.0))
-    System.Formats.Asn1 (10.0.1) - restriction: && (< net6.0) (>= netcoreapp3.0) (< xamarinios) (< xamarinmac) (< xamarintvos) (< xamarinwatchos)
+    System.Formats.Asn1 (10.0.14) - restriction: && (< net6.0) (>= netcoreapp3.0) (< xamarinios) (< xamarinmac) (< xamarintvos) (< xamarinwatchos)
       System.Memory (>= 4.6.3) - restriction: || (>= net462) (&& (< net8.0) (>= netstandard2.0))
     System.IdentityModel.Tokens.Jwt (8.14)
       Microsoft.IdentityModel.JsonWebTokens (>= 8.14) - restriction: || (>= net462) (>= netstandard2.0)
       Microsoft.IdentityModel.Tokens (>= 8.14) - restriction: || (>= net462) (>= netstandard2.0)
-    System.IO.Pipelines (10.0.1) - restriction: || (>= net462) (&& (< net6.0) (>= netstandard2.0))
+    System.IO.Pipelines (10.0.14) - restriction: || (>= net462) (&& (< net6.0) (>= netstandard2.0))
       System.Buffers (>= 4.6.1) - restriction: || (>= net462) (&& (< net8.0) (>= netstandard2.0))
       System.Memory (>= 4.6.3) - restriction: || (>= net462) (&& (< net8.0) (>= netstandard2.0))
       System.Threading.Tasks.Extensions (>= 4.6.3) - restriction: || (>= net462) (&& (< net8.0) (>= netstandard2.0))
@@ -105,19 +106,19 @@ NUGET
     System.Security.Cryptography.Cng (5.0) - restriction: && (< net462) (< net6.0) (>= netstandard2.0)
       Microsoft.NETCore.Platforms (>= 5.0) - restriction: && (< monoandroid) (>= netcoreapp2.0) (< netcoreapp2.1) (< netstandard2.1) (< xamarintvos) (< xamarinwatchos)
       System.Formats.Asn1 (>= 5.0) - restriction: && (>= netcoreapp3.0) (< xamarinios) (< xamarinmac) (< xamarintvos) (< xamarinwatchos)
-    System.Text.Encodings.Web (10.0.1) - restriction: || (>= net462) (&& (< net6.0) (>= netstandard2.0))
+    System.Text.Encodings.Web (10.0.14) - restriction: || (>= net462) (&& (< net6.0) (>= netstandard2.0))
       System.Buffers (>= 4.6.1) - restriction: || (>= net462) (&& (< net8.0) (>= netstandard2.0))
       System.Memory (>= 4.6.3) - restriction: || (>= net462) (&& (< net8.0) (>= netstandard2.0))
       System.Runtime.CompilerServices.Unsafe (>= 6.1.2) - restriction: || (>= net462) (&& (< net8.0) (>= netstandard2.0))
-    System.Text.Json (10.0.1) - restriction: || (>= net462) (&& (< net6.0) (>= netstandard2.0))
-      Microsoft.Bcl.AsyncInterfaces (>= 10.0.1) - restriction: || (>= net462) (&& (< net8.0) (>= netstandard2.0))
+    System.Text.Json (10.0.14) - restriction: || (>= net462) (&& (< net6.0) (>= netstandard2.0))
+      Microsoft.Bcl.AsyncInterfaces (>= 10.0.14) - restriction: || (>= net462) (&& (< net8.0) (>= netstandard2.0))
       System.Buffers (>= 4.6.1) - restriction: || (>= net462) (&& (< net8.0) (>= netstandard2.0))
-      System.IO.Pipelines (>= 10.0.1) - restriction: || (>= net462) (>= netstandard2.0)
+      System.IO.Pipelines (>= 10.0.14) - restriction: || (>= net462) (>= netstandard2.0)
       System.Memory (>= 4.6.3) - restriction: || (>= net462) (&& (< net8.0) (>= netstandard2.0))
       System.Runtime.CompilerServices.Unsafe (>= 6.1.2) - restriction: || (>= net462) (&& (< net8.0) (>= netstandard2.0))
-      System.Text.Encodings.Web (>= 10.0.1) - restriction: || (>= net462) (>= netstandard2.0)
+      System.Text.Encodings.Web (>= 10.0.14) - restriction: || (>= net462) (>= netstandard2.0)
       System.Threading.Tasks.Extensions (>= 4.6.3) - restriction: || (>= net462) (&& (< net8.0) (>= netstandard2.0))
-      System.ValueTuple (>= 4.6.1) - restriction: >= net462
+      System.ValueTuple (>= 4.6.2) - restriction: >= net462
     System.Threading.Tasks.Extensions (4.6.3) - restriction: || (>= net462) (&& (< net6.0) (>= netstandard2.0)) (&& (>= netstandard2.0) (< netstandard2.1))
       System.Runtime.CompilerServices.Unsafe (>= 6.1.2) - restriction: || (>= net462) (&& (< netcoreapp2.1) (>= netstandard2.0) (< netstandard2.1))
-    System.ValueTuple (4.6.1) - restriction: >= net462
+    System.ValueTuple (4.6.2) - restriction: >= net462

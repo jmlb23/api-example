@@ -1,2 +1,4 @@
 startup --windows_enable_symlinks
 build --enable_runfiles
+build --action_env=PATH
+build --host_action_env=PATH

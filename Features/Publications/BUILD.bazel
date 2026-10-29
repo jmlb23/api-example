@@ -8,10 +8,13 @@ csharp_library(
     srcs = glob(["**/*.cs"]),
     target_frameworks = ["net9.0"],
     visibility = ["//visibility:public"],
-    deps = [ 
+    deps = [
         "@paket.main//microsoft.extensions.dependencyinjection.abstractions",
         "@paket.main//microsoft.entityframeworkcore",
         "@paket.main//microsoft.entityframeworkcore.inmemory",
+        "@paket.main//microsoft.extensions.configuration",
+        "@paket.main//microsoft.extensions.configuration.abstractions",
+        "@paket.main//microsoft.aspnetcore.app.ref",
         "//Features/Core:core",
     ],
     run_analyzers = False
