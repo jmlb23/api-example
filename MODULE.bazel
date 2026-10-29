@@ -1,6 +1,7 @@
 module(name = "api-example", version = "0.1")
 
 
+#TODO: replace ASAP when master has a proper version
 bazel_dep(name = "rules_dotnet", version = "")
 
 
